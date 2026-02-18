@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class FavResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array
+    {
+        return [
+            'Title' => $this->title,
+            'Description' => $this->description,
+            'Priority' => $this->priority,
+            'Created at' => $this->created_at->format('Y-m-d')
+        ];
+    }
+}
