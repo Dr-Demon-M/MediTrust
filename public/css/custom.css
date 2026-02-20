@@ -1,0 +1,398 @@
+.content-wrapper {
+    padding: 1.5rem 1.5rem !important; 
+}
+
+.full-width-container {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.doctor-card {
+    border-radius: 15px !important;
+    border: none !important;
+    box-shadow: 0 0 20px rgba(0,0,0,0.03) !important;
+    width: 100% !important;
+}
+
+.select-table {
+    width: 100% !important;
+}
+
+.select-table thead th {
+    padding: 20px 10px !important;
+    background: #fcfcfc;
+}
+
+.select-table tbody td {
+    padding: 15px 10px !important;
+    vertical-align: middle;
+}
+
+.img-md-custom {
+    width: 45px !important;
+    height: 45px !important;
+    object-fit: cover;
+}
+
+.form-select.form-control {
+    height: 40px;
+    border: 1px solid #dee2e6;
+    font-size: 0.875rem;
+}
+
+.progress-md {
+    border-radius: 10px;
+    background-color: #f0f0f0;
+}
+
+.text-dark.fw-bold {
+    color: #2c3e50 !important;
+}
+
+.select-table tbody tr:hover {
+    background-color: #fbfbfb;
+    transition: 0.3s ease;
+}
+
+.specialty-item-card {
+    border-radius: 12px !important;
+    background: #fff;
+    transition: all 0.3s ease;
+    border: 1px solid #eee !important;
+}
+
+.specialty-item-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-color: #dee2e6 !important;
+    transform: translateY(-3px);
+}
+
+.icon-box-rounded {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.bg-opacity-10 {
+    background-color: rgba(0,0,0,0.03); /* افتراضي */
+}
+
+.specialty-item-card h5 {
+    font-size: 1.05rem;
+    color: #1F3BB3;
+}
+
+.specialty-item-card p {
+    font-size: 0.85rem;
+}
+
+.bg-light-primary { background-color: rgba(31, 59, 179, 0.08); }
+.bg-light-success { background-color: rgba(71, 164, 71, 0.08); }
+.bg-light-warning { background-color: rgba(255, 193, 7, 0.08); }
+
+.circle-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.mini-stats-card .card-body {
+    padding: 1.25rem;
+}
+
+.badge-outline-primary {
+    border: 1px solid #1F3BB3;
+    color: #1F3BB3;
+    background: transparent;
+    padding: 5px 10px;
+}
+
+.specialty-detail-card h3 {
+    color: #000;
+}
+
+.doctor-profile-card {
+    border-radius: 20px !important;
+    border: none !important;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    background: #fff;
+}
+
+.profile-img-wrapper {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.profile-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 3px solid #fff;
+}
+
+.status-indicator {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+}
+
+.bg-primary {
+    background-color: #1F3BB3 !important;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.table thead th {
+    border-top: none;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table td {
+    padding: 18px 10px !important;
+    vertical-align: middle;
+}
+
+.lh-base {
+    line-height: 1.6 !important;
+}
+
+#quickBookModal .modal-content {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+#quickBookModal .form-control, 
+#quickBookModal .form-select {
+    border: 1px solid #eef2f5;
+    padding: 12px 15px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+}
+
+#quickBookModal .form-control:focus {
+    border-color: #1F3BB3;
+    box-shadow: none;
+}
+
+#quickBookModal .modal-header {
+    padding: 25px 25px 10px;
+}
+
+#quickBookModal .modal-body {
+    padding: 10px 25px 25px;
+}
+
+#quickBookModal .btn-close {
+    background-size: 10px;
+    box-shadow: none;
+}
+.forms-sample .form-group {
+    margin-bottom: 1.2rem;
+}
+
+.forms-sample .form-control, 
+.forms-sample .form-select {
+    border: 1px solid #dadada;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    height: auto;
+}
+
+.forms-sample .form-control:focus {
+    border-color: #1F3BB3;
+    box-shadow: none;
+    background-color: #fff;
+}
+
+.forms-sample textarea.form-control {
+    line-height: 1.5;
+}
+
+.img-thumbnail {
+    padding: 0.25rem;
+    background-color: #fff;
+    border: 2px solid #f1f1f1;
+}
+
+.form-range::-webkit-slider-thumb {
+    background: #1F3BB3;
+}
+
+.border-start {
+    border-color: #f3f3f3 !important;
+}
+
+.btn.text-danger:hover {
+    background-color: #ffeeee;
+    color: #d9534f !important;
+}
+
+.d-inline {
+    display: inline-block;
+}
+
+.forms-sample .form-group {
+    margin-bottom: 1.2rem;
+}
+
+.forms-sample .form-control, 
+.forms-sample .form-select {
+    border: 1px solid #eef2f5;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    height: auto;
+}
+
+.forms-sample .form-control:focus {
+    border-color: #1F3BB3;
+    box-shadow: none;
+    background-color: #fff;
+}
+
+.form-check-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.form-check-input {
+    margin-right: 10px;
+}
+
+.schedule-grid thead th {
+    background-color: #f8f9fa;
+    color: #484848;
+    font-weight: 600;
+    padding: 15px;
+    border-bottom: 2px solid #ebedf2 !important;
+}
+
+.time-label {
+    background-color: #fcfcfc;
+    color: #1F3BB3;
+    vertical-align: middle !important;
+}
+
+.slot-item {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slot-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.slot-item.busy {
+    color: #d9534f !important; 
+}
+
+.slot-item.available {
+    color: #1F3BB3 !important; 
+}
+.slot-item.away {
+    color: #ed9212 !important; 
+}
+/* Exception Modal Styles */
+.modal-content {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    border-radius: 15px 15px 0 0;
+}
+
+.modal-title {
+    color: #1F3BB3;
+    font-weight: 700;
+}
+
+.modal-body label {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.modal-body .form-control, 
+.modal-body .form-select {
+    border: 1px solid #eef2f5;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.modal-body .form-control:focus {
+    border-color: #1F3BB3;
+    box-shadow: 0 0 0 0.2rem rgba(31, 59, 179, 0.1);
+}
+
+
+.alert-success { background-color: #d1e7dd; color: #0f5132; }
+.alert-danger { background-color: #f8d7da; color: #842029; }
+.alert-info { background-color: #cff4fc; color: #055160; }
+
+/* حركة بسيطة عند ظهور التنبيه */
+.fade.show {
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* تحسين شكل المدخلات لتناسب شاشة العيادة */
+.custom-input {
+    height: 50px !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    padding: 10px 15px !important;
+}
+
+.custom-input:focus {
+    border-color: #1F3BB3 !important;
+    box-shadow: 0 0 0 0.2rem rgba(31, 59, 179, 0.1) !important;
+}
+
+.card {
+    border-radius: 12px !important;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05) !important;
+}
+
+/* لضمان عرض الـ Card بشكل سليم في StarAdmin */
+.grid-margin {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    font-size: 0.85rem !important;
+    color: #4a4a4a !important;
+    font-weight: 600 !important;
+}

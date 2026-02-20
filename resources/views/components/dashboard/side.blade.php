@@ -16,11 +16,11 @@
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('doctors.index') }}">{{ __('All Doctors') }}</a>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="{{ route('doctors.index') }}">{{ __('All Doctors') }}</a>
                     </li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">{{ __('Availability Schedule') }}</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">{{ __('Specialties') }}</a>
-                    </li>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="{{ route('availability-schedule.index') }}">{{ __('Availability Schedule') }}</a></li>
                 </ul>
             </div>
         </li>
@@ -28,16 +28,14 @@
             <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false"
                 aria-controls="form-elements">
                 <i class="mdi mdi-hospital-building menu-icon"></i>
-                <span class="menu-title">{{ __('Departments') }}</span>
+                <span class="menu-title">{{ __('Specialties') }}</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="form-elements">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">{{ __('All Departments') }}</a>
+                    <li class="nav-item"><a class="nav-link"
+                            href="{{ route('specialties.index') }}">{{ __('All Specialties') }}</a>
                     </li>
-                </ul>
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">{{ __('Department Settings') }}</a></li>
                 </ul>
             </div>
         </li>
@@ -49,10 +47,10 @@
             </a>
             <div class="collapse" id="charts">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">{{ __('All Services') }}</a></li>
-                </ul>
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">{{ __('Featured Services') }}</a>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="pages/charts/chartjs.html">{{ __('All Services') }}</a></li>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="pages/charts/chartjs.html">{{ __('Featured Services') }}</a>
                     </li>
                 </ul>
             </div>
@@ -65,18 +63,16 @@
             </a>
             <div class="collapse" id="tables">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">{{ __('All Appointments') }}</a>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="pages/tables/basic-table.html">{{ __('All Appointments') }}</a>
                     </li>
-                </ul>
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">{{ __('Today’s Appointments') }}</a></li>
-                </ul>
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">{{ __('Pending Requests') }}</a>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="pages/tables/basic-table.html">{{ __('Today’s Appointments') }}</a></li>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="pages/tables/basic-table.html">{{ __('Pending Requests') }}</a>
                     </li>
-                </ul>
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">{{ __('Calendar View') }}</a>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="pages/tables/basic-table.html">{{ __('Calendar View') }}</a>
                     </li>
                 </ul>
             </div>
@@ -89,11 +85,11 @@
             </a>
             <div class="collapse" id="icons">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/icons/font-awesome.html">{{ __('All Patients') }}</a>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="pages/icons/font-awesome.html">{{ __('All Patients') }}</a>
                     </li>
-                </ul>
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/icons/font-awesome.html">{{ __('Consultation') }}</a>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="pages/icons/font-awesome.html">{{ __('Consultation') }}</a>
                     </li>
                 </ul>
             </div>
