@@ -48,9 +48,9 @@
             <div class="collapse" id="charts">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link"
-                            href="pages/charts/chartjs.html">{{ __('All Services') }}</a></li>
+                            href="{{ route('services.index') }}">{{ __('All Services') }}</a></li>
                     <li class="nav-item"> <a class="nav-link"
-                            href="pages/charts/chartjs.html">{{ __('Featured Services') }}</a>
+                            href="{{ route('services.featured') }}">{{ __('Featured Services') }}</a>
                     </li>
                 </ul>
             </div>

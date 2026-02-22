@@ -49,12 +49,17 @@ class DoctorController extends Controller
      */
     public function show(string $slug)
     {
+        $patients = Availability::where('status', 'Occupied')
+            ->whereHas('doctor', function ($query) use ($slug) {
+                $query->where('slug', $slug);
+            })
+            ->count();
         $doctor = Doctor::where('slug', $slug)->firstOrFail();
         $rating = $doctor->rating; // 2.5
         $fullStars = floor($rating); // 2   
         $halfStar = ($rating - $fullStars) >= 0.5 ? 1 : 0; // 1
         $emptyStars = 5 - ($fullStars + $halfStar); // 2
-        return view('Dashboard.Doctors.show', compact('doctor', 'rating', 'fullStars', 'halfStar', 'emptyStars'));
+        return view('Dashboard.Doctors.show', compact('doctor', 'rating', 'fullStars', 'halfStar', 'emptyStars', 'patients'));
     }
 
     /**
@@ -117,6 +122,4 @@ class DoctorController extends Controller
         $path = $file->store('doctors', 'public');
         return $path;
     }
-
-
 }

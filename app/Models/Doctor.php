@@ -44,6 +44,11 @@ class Doctor extends Model
         return $this->hasMany(Availability::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     // Scopes
     public function ScopeFilter(Builder $builder, array $filters)
     {

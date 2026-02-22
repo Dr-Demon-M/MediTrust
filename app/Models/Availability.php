@@ -9,7 +9,6 @@ class Availability extends Model
 {
     protected $guarded = [];
 
-    // Scopes
     public function ScopeFilter(Builder $builder, array $filters)
     {
         $builder->when($filters['specialty'] ?? null, function ($builder, $value) {
@@ -17,7 +16,6 @@ class Availability extends Model
         });
     }
 
-    // Relations 
     public function doctor() {
         return $this->belongsTo(Doctor::class);
     }

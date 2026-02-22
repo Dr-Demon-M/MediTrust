@@ -395,4 +395,378 @@ label {
     font-size: 0.85rem !important;
     color: #4a4a4a !important;
     font-weight: 600 !important;
+}/* Clinic Services - Integrated Design */
+
+.inner-service-box {
+    background-color: #ffffff;
+    border: 1px solid #f1f3f9 !important; /* حدود خفيفة جداً */
+    border-radius: 12px;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.inner-service-box:hover {
+    border-color: #1F3BB3 !important;
+    box-shadow: 0 5px 15px rgba(31, 59, 179, 0.05);
+}
+
+.category-icon-small {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.border-bottom-light {
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.border-bottom-light:last-child {
+    border-bottom: none;
+}
+
+.small-icon {
+    font-size: 0.9rem;
+}
+
+.manage-link-custom {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #1F3BB3;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.manage-link-custom:hover {
+    color: #0d1a5a;
+}
+
+/* تعديل عرض الـ Row لضمان ملء الصفحة */
+.row.px-2 {
+    margin-right: -10px;
+    margin-left: -10px;
+}
+
+/* Clinic Services - Updated for Alignment */
+
+.inner-service-box {
+    background-color: #ffffff;
+    border: 1px solid #f1f3f9 !important;
+    border-radius: 12px;
+    height: 100%; /* مهم جداً عشان الكروت كلها تطول لبعض */
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+/* هذه الخاصية ستجعل اللينك ينزل للأسفل مهما كان عدد الخدمات قليل */
+.mt-auto {
+    margin-top: auto !important;
+}
+
+.manage-link-custom {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #1F3BB3;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    display: inline-block;
+    padding-top: 10px;
+}
+
+.manage-link-custom:hover {
+    color: #0d1a5a;
+    transform: translateX(3px);
+    transition: 0.3s;
+}
+
+.border-bottom-light {
+    border-bottom: 1px solid #f8f9fa;
+}
+
+/* التأكد من أن الـ Card الأساسية تتمدد */
+.stretch-card {
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+}
+/* Featured Services Styles */
+
+.featured-box {
+    background-color: #ffffff;
+    border: 1px solid #eef1f6 !important;
+    border-radius: 16px;
+    height: 100%;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.featured-box:hover {
+    transform: translateY(-8px);
+    border-color: #1F3BB3 !important;
+    box-shadow: 0 12px 24px rgba(31, 59, 179, 0.08) !important;
+}
+
+.featured-icon-circle {
+    width: 55px;
+    height: 55px;
+    background-color: #f0f3ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+}
+
+.featured-item-tag {
+    background: #fcfcfd;
+    border: 1px solid #f1f3f9;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: #4a4a4a;
+    display: flex;
+    align-items: center;
+}
+
+.manage-btn-featured {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #1F3BB3;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-top: 1px solid #f8f9fa;
+    display: block;
+    padding-top: 15px;
+}
+
+.manage-btn-featured:hover {
+    color: #0d1a5a;
+}
+
+.mt-auto {
+    margin-top: auto !important;
+}
+
+/* لضمان تمدد الكروت بشكل متساوي */
+.stretch-card {
+    display: flex;
+    align-items: stretch;
+}
+/* Add Service Page Styling */
+
+.main-add-card {
+    border-radius: 20px !important;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.icon-circle-header {
+    width: 70px;
+    height: 70px;
+    background-color: #f0f3ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.form-label-custom {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #4b4b4b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.input-group-custom {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    color: #1F3BB3;
+    z-index: 10;
+}
+
+.input-field, .select-field, .text-area-field {
+    border-radius: 12px !important;
+    border: 1px solid #eef1f6 !important;
+    padding: 12px 15px 12px 45px !important; /* مساحة للأيقونة */
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.select-field {
+    padding-left: 15px !important;
+}
+
+.input-field:focus, .select-field:focus, .text-area-field:focus {
+    border-color: #1F3BB3 !important;
+    box-shadow: 0 0 0 0.2rem rgba(31, 59, 179, 0.08) !important;
+}
+
+.text-area-field {
+    padding-left: 15px !important;
+}
+
+.btn-save {
+    background-color: #1F3BB3 !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 12px 35px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 12px rgba(31, 59, 179, 0.2);
+}
+
+.btn-cancel {
+    border-radius: 12px !important;
+    padding: 12px 35px !important;
+    color: #6c757d;
+}
+
+.custom-switch .form-check-input {
+    width: 3rem;
+    height: 1.5rem;
+    cursor: pointer;
+}
+
+/* إصلاح زر الـ Switch */
+.featured-switch-container {
+    display: flex;
+    align-items: center;
+    padding-left: 3.5em !important; /* مسافة كافية للـ Switch */
+    min-height: 40px;
+}
+
+.custom-switch-input {
+    width: 3.5rem !important; /* تكبير حجم الزر قليلاً */
+    height: 1.75rem !important;
+    cursor: pointer;
+    margin-left: -3.5em !important;
+}
+
+/* لضمان عدم التداخل مع أي عناصر أخرى */
+.form-check-input:checked {
+    background-color: #1F3BB3 !important;
+    border-color: #1F3BB3 !important;
+}
+
+/* تحسين شكل الليبل بجانب السويتش */
+.form-check-label {
+    user-select: none;
+    font-size: 0.9rem;
+}
+
+/* Empty State Styling */
+
+.empty-state-container {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.empty-icon-wrapper {
+    width: 100px;
+    height: 100px;
+    background-color: #f8f9fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.empty-icon-wrapper i {
+    font-size: 3.5rem;
+    color: #cbd5e0;
+}
+
+.empty-state-container h4 {
+    color: #4a5568;
+    letter-spacing: -0.5px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* تنسيق سطر الخدمة */
+.service-item-container {
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 2px 8px;
+}
+
+.service-item-container:hover {
+    background-color: #f8faff;
+}
+
+/* أيقونة الحذف السريع */
+.quick-delete-btn {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-decoration: none !important;
+}
+
+.service-item-container:hover .quick-delete-btn {
+    opacity: 1;
+}
+
+.quick-delete-btn:hover {
+    transform: scale(1.2);
+    color: #dc3545 !important;
+}
+
+.service-item-clickable {
+    flex-grow: 1;
+}
+/* تأكد من أن الكرت يملأ كامل مساحة العمود */
+.featured-box {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featured-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08) !important;
+}
+
+/* تنسيق أيقونة العيادة */
+.featured-icon-circle {
+    width: 60px;
+    height: 60px;
+    background: #f4f6ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+}
+
+/* تنسيق أسطر الخدمات داخل الكرت */
+.featured-item-tag {
+    background: #fcfcfc;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+}
+
+/* زر MANAGE SERVICES */
+.manage-btn-featured {
+    color: #4b49ac;
 }

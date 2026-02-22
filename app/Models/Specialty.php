@@ -35,9 +35,11 @@ class Specialty extends Model
 
     public function availabilities()
     {
-        return $this->hasManyThrough(
-            Availability::class,
-            Doctor::class
-        );
+        return $this->hasManyThrough(Availability::class,Doctor::class);
+    }
+
+    public function services()
+    {
+        return $this->hasMany(Service::class);
     }
 }

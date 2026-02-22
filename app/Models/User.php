@@ -60,4 +60,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function addtasktofav(){
         return $this->belongsToMany(Task::class, 'favorites');
     }
+
+    public function doctor()
+    {
+        return $this->hasOne(Doctor::class);
+    }
 }

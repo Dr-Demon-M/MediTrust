@@ -84,9 +84,11 @@ class SpecialtyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $slug)
     {
-        //
+        $specialty = Specialty::where('slug', $slug)->firstOrFail();
+        $specialty->delete();
+        return redirect()->route('specialties.index')->with('delete', 'Specialty Deleted Successfully');
     }
 
     public function showNewAppointmentForm(string $slug)

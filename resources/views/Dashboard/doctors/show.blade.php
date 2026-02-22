@@ -28,7 +28,7 @@
                                         @endfor
                                     </div>
                                     <span class="text-muted small">
-                                        ({{ $doctor->rating }} Rating from 120 Patients)
+                                        ({{ $doctor->rating }} Rating from {{ $patients }} Patients)
                                     </span>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                             <div class="d-flex justify-content-between">
                                 <div>
                                     <p class="mb-2">Total Patients</p>
-                                    <h2 class="fw-bold">1,250</h2>
+                                    <h2 class="fw-bold">{{ $patients }}</h2>
                                 </div>
                                 <i class="mdi mdi-account-group fs-1 opacity-50"></i>
                             </div>
@@ -142,6 +142,65 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="quickBookModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Exception</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('availability-schedule.add', $doctor->slug) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="doctor_id" value="{{ $doctor->id }}">
+
+                    <div class="modal-body">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold small">Select Day</label>
+                            <select name="day" class="form-select" required style="color:black;">
+                                <option value="Saturday">Saturday</option>
+                                <option value="Sunday">Sunday</option>
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="fw-bold small">Select Time Slot</label>
+                            <select name="start_time" class="form-select" required style="color:black;">
+                                <option value="09:00:00">09:00 AM</option>
+                                <option value="10:00:00">10:00 AM</option>
+                                <option value="11:00:00">11:00 AM</option>
+                                <option value="12:00:00">12:00 PM</option>
+                                <option value="13:00:00">01:00 PM</option>
+                                <option value="14:00:00">02:00 PM</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="fw-bold small">Reason / Status</label>
+                            <select name="status" class="form-select" style="color:black;">
+                                <option value="Occupied">Booked Appointment</option>
+                                <option value="Away">Emergency Leave / Break</option>
+                                <option value="Free">Set as Available</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="fw-bold small">Notes (Optional)</label>
+                            <textarea name="notes" class="form-control" rows="3" placeholder="e.g. Patient name or reason for change"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary text-white">Update Slot</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

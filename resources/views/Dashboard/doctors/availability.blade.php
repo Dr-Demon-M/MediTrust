@@ -1,7 +1,6 @@
 @extends('layouts.dashboardLayout')
 
 @section('content')
-
     <div class="row full-width-container">
         <div class="col-12 grid-margin stretch-card">
             <div class="card doctor-card m-1">
@@ -22,19 +21,23 @@
                             <a href="{{ route('availability-schedule.index') }}" class="btn btn-outline-dark">
                                 <i class="icon-arrow-left"></i> Back to List
                             </a>
-                            <button class="btn btn-primary text-white me-0" data-bs-toggle="modal"
-                                data-bs-target="#addExceptionModal">
-                                <i class="icon-plus"></i> Add Exception
-                            </button>
-                            <form action="{{ route('availability-schedule.delete', $doctor->slug) }}" method="POST"
-                                class="d-inline" id="clearScheduleForm"
-                                onsubmit="return confirm('Are you sure you want to delete this Schedule?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-icon-text" onclick="confirmClear()">
-                                    <i class="mdi mdi-delete-sweep"></i> Clear Schedule
+                            @can('create', App\Models\Availability::class)
+                                <button class="btn btn-primary text-white me-0" data-bs-toggle="modal"
+                                    data-bs-target="#addExceptionModal">
+                                    <i class="icon-plus"></i> Add Exception
                                 </button>
-                            </form>
+                            @endcan
+                            @can('delete', $availability ?? new App\Models\Availability())
+                                <form action="{{ route('availability-schedule.delete', [$doctor->slug]) }}" method="POST"
+                                    class="d-inline" id="clearScheduleForm"
+                                    onsubmit="return confirm('Are you sure you want to delete this Schedule?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-icon-text" onclick="confirmClear()">
+                                        <i class="mdi mdi-delete-sweep"></i> Clear Schedule
+                                    </button>
+                                </form>
+                            @endcan
                         </div>
                     </div>
                     <div class="table-responsive">

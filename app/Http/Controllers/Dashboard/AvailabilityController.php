@@ -20,26 +20,18 @@ class AvailabilityController extends Controller
     public function showAvailabilitySchedule($slug)
     {
         $doctor = Doctor::with('specialty')->where('slug', $slug)->firstOrFail();
-        // جلب المواعيد وتحويلها لمصفوفة مفتاحها "Day-Time"
         $schedules = Availability::where('doctor_id', $doctor->id)
             ->get()
             ->mapWithKeys(function ($item) {
-                // تحويل الوقت من 13:00:00 إلى 01:00 PM ليتطابق مع الـ Blade
                 $timeKey = \Carbon\Carbon::parse($item->start_time)->format('h:00 A');
                 return ["{$item->day}-{$timeKey}" => $item->status];
             })->toArray();
         return view('Dashboard.Doctors.availability', compact('doctor', 'schedules'));
     }
 
-    public function deleteAvailabilitySchedule($slug)
-    {
-        $doctor = Doctor::with('specialty')->where('slug', $slug)->firstOrFail();
-        $doctor->availability()->delete();
-        return redirect()->route('availability-schedule.index')->with('error', 'Schedule Deleted Successfully');
-    }
-
     public function addAvailabilitySchedule(Request $request, string $slug)
     {
+        $this->authorize('create', Availability::class);
         $doctor = Doctor::where('slug', $slug)->firstOrFail();
         $data = $request->validate([
             'day' => 'required|string|in:Saturday,Sunday,Monday,Tuesday,Wednesday,Thursday,Friday',
@@ -48,7 +40,6 @@ class AvailabilityController extends Controller
             'notes' => 'nullable|string|max:255'
         ]);
         $data['doctor_id'] = $doctor->id;
-        $doctor = Doctor::where('slug', $slug)->firstOrFail();
         $exists = Availability::where('doctor_id', $doctor->id)
             ->where('day', $request->day)
             ->where('start_time', $request->start_time)
@@ -59,5 +50,13 @@ class AvailabilityController extends Controller
         }
         Availability::create($data);
         return redirect()->route('availability-schedule.show', $slug)->with('success', 'Schedule Added Successfully');
+    }
+
+    public function deleteAvailabilitySchedule($slug, Availability $availability)
+    {
+        $this->authorize('delete', $availability);
+        $doctor = Doctor::with('specialty')->where('slug', $slug)->firstOrFail();
+        $availability->delete();
+        return redirect()->route('availability-schedule.index')->with('error', 'Schedule Table Deleted Successfully');
     }
 }
