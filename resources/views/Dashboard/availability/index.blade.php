@@ -18,7 +18,8 @@
                     <div class="row mb-3">
                         <div class="col-md-3">
                             <form method="GET" action="{{ route('availability-schedule.index') }}">
-                                <select name="specialty" style="color: black;" class="form-select shadow-none" onchange="this.form.submit()">
+                                <select name="specialty" style="color: black;" class="form-select shadow-none"
+                                    onchange="this.form.submit()">
                                     <option value="">All</option>
                                     @foreach ($specialties as $specialty)
                                         <option value="{{ $specialty->id }}"
@@ -82,12 +83,14 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <div class="d-flex justify-content-center">
-                                                <a href="{{ route('availability-schedule.show', $doctor->slug) }}"
-                                                    class="btn btn-light btn-sm me-2 text-primary">
-                                                    <i class="mdi mdi-eye"></i> View Schedule
-                                                </a>
-                                            </div>
+                                            @can('view', $doctor)
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="{{ route('availability-schedule.show', $doctor->slug) }}"
+                                                        class="btn btn-light btn-sm me-2 text-primary">
+                                                        <i class="mdi mdi-eye"></i> View Schedule
+                                                    </a>
+                                                </div>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @empty

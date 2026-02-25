@@ -3,25 +3,26 @@
 namespace App\Policies;
 
 use App\Models\Availability;
+use App\Models\Doctor;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class AvailabilityPolicy 
+class AvailabilityPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Availability $availability): bool
+    public function view(User $user, Doctor $doctor): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +30,7 @@ class AvailabilityPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role === 'super_admin';
+        return true;
     }
 
     /**
@@ -37,15 +38,15 @@ class AvailabilityPolicy
      */
     public function update(User $user, Availability $availability): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user): bool
+    public function delete(User $user, Availability $availability): bool
     {
-        return $user->role === 'super_admin';
+        return false;
     }
 
     /**

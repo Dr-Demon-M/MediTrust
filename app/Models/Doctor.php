@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 
 class Doctor extends Model
 {
+    use Notifiable;
+
     protected $fillable = [
         'user_id',
         'name',
@@ -36,7 +39,7 @@ class Doctor extends Model
     // Relationships
     public function specialty()
     {
-        return $this->belongsTo(specialty::class);
+        return $this->belongsTo(Specialty::class);
     }
 
     public function availability()
@@ -49,6 +52,13 @@ class Doctor extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
+
+    
+
     // Scopes
     public function ScopeFilter(Builder $builder, array $filters)
     {
@@ -57,7 +67,8 @@ class Doctor extends Model
         });
     }
 
-    public function badge(){
+    public function badge()
+    {
         return match ($this->status) {
             'active' => 'success',
             'inactive' => 'primary',
@@ -65,4 +76,23 @@ class Doctor extends Model
             default => 'secondary',
         };
     }
+
+    public static function generateUniqueSlug($name)
+    {
+        $slug = Str::slug($name);
+        $originalSlug = $slug;
+        $count = 1;
+
+        while (self::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $count;
+            $count++;
+        }
+
+        return $slug;
+    }
+
+public function getRouteKeyName()
+{
+    return 'slug';
 }
+    }

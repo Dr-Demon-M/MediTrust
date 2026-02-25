@@ -10,10 +10,12 @@
                             <h4 class="card-title card-title-dash">Manage Doctors</h4>
                             <p class="card-subtitle card-subtitle-dash">Total registered doctors: {{ $doctors->count() }}</p>
                         </div>
-                        <div class="btn-wrapper">
-                            <a href="{{ route('doctors.create') }}" class="btn btn-primary text-white me-0"><i
-                                    class="icon-plus"></i> Add New Doctor</a>
-                        </div>
+                        @can('create', App\Models\Doctor::class)
+                            <div class="btn-wrapper">
+                                <a href="{{ route('doctors.create') }}" class="btn btn-primary text-white me-0"><i
+                                        class="icon-plus"></i> Add New Doctor</a>
+                            </div>
+                        @endcan
                     </div>
 
                     <div class="table-responsive">
@@ -25,7 +27,7 @@
                                     <th>Experience</th>
                                     <th>Rating</th>
                                     <th>Status</th>
-                                    <th class="text-center">Action</th>
+                                        <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,7 +44,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <h6>{{ $doctor->specialty->name  ?? 'Not Assigned' }}</h6>
+                                            <h6>{{ $doctor->specialty->name ?? 'Not Assigned' }}</h6>
                                             <p class="text-muted">{{ $doctor->department ?? 'No Department Assigned' }}</p>
                                         </td>
                                         <td>
@@ -55,23 +57,32 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="badge badge-opacity-{{ $doctor->badge() }}">{{ $doctor->status }}</div>
+                                            <div class="badge badge-opacity-{{ $doctor->badge() }}">{{ $doctor->status }}
+                                            </div>
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-center">
-                                                <a href="{{ route('doctors.show', $doctor->slug) }}"
-                                                    class="btn btn-light btn-sm me-2"><i class="mdi mdi-eye"></i></a>
-                                                <a style="margin-right:8px" href="{{ route('doctors.edit', $doctor->slug) }}" class="btn btn-light btn-sm text-primary"><i
-                                                        class="mdi mdi-pencil"></i></a>
-                                                <form action="{{ route('doctors.destroy', $doctor->slug) }}" method="POST"
-                                                    class="d-inline"
-                                                    onsubmit="return confirm('Are you sure you want to delete this doctor?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-light btn-sm text-danger">
-                                                        <i class="mdi mdi-delete"></i>
-                                                    </button>
-                                                </form>
+                                                @can('view', $doctor)
+                                                    <a href="{{ route('doctors.show', $doctor->slug) }}"
+                                                        class="btn btn-light btn-sm me-2"><i class="mdi mdi-eye"></i></a>
+                                                @endcan
+                                                @can('update', $doctor)
+                                                    <a style="margin-right:8px"
+                                                        href="{{ route('doctors.edit', $doctor->slug) }}"
+                                                        class="btn btn-light btn-sm text-primary"><i
+                                                            class="mdi mdi-pencil"></i></a>
+                                                @endcan
+                                                @can('delete', $doctor)
+                                                    <form action="{{ route('doctors.destroy', $doctor->slug) }}" method="POST"
+                                                        class="d-inline"
+                                                        onsubmit="return confirm('Are you sure you want to delete this doctor?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-light btn-sm text-danger">
+                                                            <i class="mdi mdi-delete"></i>
+                                                        </button>
+                                                    </form>
+                                                @endcan
                                             </div>
                                         </td>
                                     </tr>

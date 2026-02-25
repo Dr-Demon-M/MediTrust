@@ -1,8 +1,8 @@
 @extends('layouts.dashboardLayout')
 
 @section('content')
-    <div class="row full-width-container">
-        <div class="col-12">
+    <div class="row full-width-container ">
+        <div class="col-12 m-1">
             <div class="card doctor-profile-card mb-4">
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between flex-wrap">
@@ -38,9 +38,11 @@
                                 data-bs-target="#quickBookModal">
                                 <i class="mdi mdi-calendar-plus me-1"></i> Quick Book
                             </button>
-                            <a href="{{ route('doctors.edit', $doctor->slug) }}" class="btn btn-outline-primary me-2"><i
-                                    class="mdi mdi-pencil"></i> Edit
-                                Profile</a>
+                            @can('updata', $doctor)
+                                <a href="{{ route('doctors.edit', $doctor->slug) }}" class="btn btn-outline-primary me-2"><i
+                                        class="mdi mdi-pencil"></i> Edit
+                                    Profile</a>
+                            @endcan
                         </div>
                     </div>
                 </div>
@@ -66,7 +68,7 @@
                                 </li>
                                 <li class="mb-0">
                                     <p class="text-muted mb-2">Short Bio:</p>
-                                    <p class="small text-dark lh-base">{{ $doctor->bio }}</p>
+                                    <p class="small text-dark lh-base ">{{ $doctor->bio ? $doctor->bio : 'No bio yet'  }}</p>
                                 </li>
                             </ul>
                         </div>
@@ -90,38 +92,36 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <h4 class="card-title mb-0">Weekly Work Schedule</h4>
-                                <button class="btn btn-link btn-sm text-decoration-none">Manage Availability</button>
+                                <a href="{{ route('availability-schedule.show', $doctor->slug) }}"
+                                    class="btn btn-link btn-sm text-decoration-none">Show Shaduale</a>
                             </div>
-
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead class="bg-light">
                                         <tr>
                                             <th>Day</th>
                                             <th>Shift Timing</th>
-                                            <th>Clinic Room</th>
                                             <th>Status</th>
+                                            <th class="text-center">Notes</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="fw-bold">Saturday</td>
-                                            <td>05:00 PM - 09:00 PM</td>
-                                            <td>Room A1</td>
-                                            <td><span class="badge badge-opacity-success">Active</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-bold">Monday</td>
-                                            <td>05:00 PM - 09:00 PM</td>
-                                            <td>Room A1</td>
-                                            <td><span class="badge badge-opacity-success">Active</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-bold">Wednesday</td>
-                                            <td>10:00 AM - 02:00 PM</td>
-                                            <td>Room B2</td>
-                                            <td><span class="badge badge-opacity-warning">Full Booked</span></td>
-                                        </tr>
+                                        @forelse ($doctor->availability->take(5) as $appointment)
+                                            <tr>
+                                                <td class="fw-bold">{{ $appointment->day }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($appointment->start_time)->format('h:i A') }}
+                                                    -
+                                                    {{ \Carbon\Carbon::parse($appointment->start_time)->addHour()->format('h:i A') }}
+                                                </td>
+                                                <td>{{ $appointment->status }}</td>
+                                                <td><span class="font-weight-light">" {{ $appointment->notes }} "</span>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="4" class="text-center text-muted">No availability schedule set</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
@@ -131,11 +131,12 @@
                                 <div class="list-group list-group-flush">
                                     <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
                                         <small>Last consultation completed</small>
-                                        <span class="text-muted small">2 hours ago</span>
+                                        <span
+                                            class="text-muted small">{{ $lastConsultation ? $lastConsultation->appointment_time->diffForHumans() : 'No consultations yet' }}</span>
                                     </div>
                                     <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
                                         <small>Profile details updated by Admin</small>
-                                        <span class="text-muted small">Yesterday</span>
+                                        <span class="text-muted small">{{ $doctor->updated_at->diffForHumans(); }}</span>
                                     </div>
                                 </div>
                             </div>

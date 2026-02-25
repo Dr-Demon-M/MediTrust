@@ -21,13 +21,13 @@
                             <a href="{{ route('availability-schedule.index') }}" class="btn btn-outline-dark">
                                 <i class="icon-arrow-left"></i> Back to List
                             </a>
-                            @can('create', App\Models\Availability::class)
+                            @can('create', $doctor)
                                 <button class="btn btn-primary text-white me-0" data-bs-toggle="modal"
                                     data-bs-target="#addExceptionModal">
                                     <i class="icon-plus"></i> Add Exception
                                 </button>
                             @endcan
-                            @can('delete', $availability ?? new App\Models\Availability())
+                            @can('delete', $doctor)
                                 <form action="{{ route('availability-schedule.delete', [$doctor->slug]) }}" method="POST"
                                     class="d-inline" id="clearScheduleForm"
                                     onsubmit="return confirm('Are you sure you want to delete this Schedule?');">
@@ -75,7 +75,6 @@
                                                 // البحث عن الحالة في المصفوفة القادمة من الـ Controller
                                                 $status = $schedules[$key] ?? 'Free';
                                             @endphp
-
                                             <td class="p-2">
                                                 @if ($status == 'Occupied')
                                                     <div class="slot-item busy" data-bs-toggle="tooltip"

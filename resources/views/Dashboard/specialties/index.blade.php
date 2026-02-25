@@ -10,10 +10,12 @@
                             <h4 class="card-title card-title-dash">Medical Specialties</h4>
                             <p class="card-subtitle card-subtitle-dash">Manage hospital departments and medical fields</p>
                         </div>
-                        <div class="btn-wrapper">
-                            <a href="{{ route('specialties.create') }}" class="btn btn-primary text-white me-0"><i
-                                    class="icon-plus"></i> Add New Specialty</a>
-                        </div>
+                        @can('create', App\Models\Specialty::class)
+                            <div class="btn-wrapper">
+                                <a href="{{ route('specialties.create') }}" class="btn btn-primary text-white me-0"><i
+                                        class="icon-plus"></i> Add New Specialty</a>
+                            </div>
+                        @endcan
                     </div>
 
                     <div class="row">
@@ -30,23 +32,31 @@
                                             <p class="text-muted mb-0">{{ $spec->doctors->count() }} Doctors</p>
                                         </div>
                                     </div>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link text-muted p-0" type="button"
-                                            data-bs-toggle="dropdown">
-                                            <i class="mdi mdi-dots-vertical fs-5"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item"
-                                                    href="{{ route('specialties.edit', $spec->slug) }}"><i
-                                                        class="mdi mdi-pencil me-2"></i>Edit</a></li>
-                                            <li><a class="dropdown-item"
-                                                    href="{{ route('specialties.show', $spec->slug) }}"><i
-                                                        class="mdi mdi-eye-outline me-2"></i>Show</a></li>
-                                            <li><button class="dropdown-item text-danger"
-                                                    onclick="confirmDelete('{{ $spec->slug }}')"><i
-                                                        class="mdi mdi-delete me-2"></i>Delete</button></li>
-                                        </ul>
-                                    </div>
+                                    @canany(['update', 'view', 'delete'], $spec)
+                                        <div class="dropdown">
+                                            <button class="btn btn-link text-muted p-0" type="button"
+                                                data-bs-toggle="dropdown">
+                                                <i class="mdi mdi-dots-vertical fs-5"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                @can('update', $spec)
+                                                    <li><a class="dropdown-item"
+                                                            href="{{ route('specialties.edit', $spec->slug) }}"><i
+                                                                class="mdi mdi-pencil me-2"></i>Edit</a></li>
+                                                @endcan
+                                                @can('view', $spec)
+                                                    <li><a class="dropdown-item"
+                                                            href="{{ route('specialties.show', $spec->slug) }}"><i
+                                                                class="mdi mdi-eye-outline me-2"></i>Show</a></li>
+                                                @endcan
+                                                @can('delete', $spec)
+                                                    <li><button class="dropdown-item text-danger"
+                                                            onclick="confirmDelete('{{ $spec->slug }}')"><i
+                                                                class="mdi mdi-delete me-2"></i>Delete</button></li>
+                                                @endcan
+                                            </ul>
+                                        </div>
+                                    @endcan
                                 </div>
                             </div>{{-- Hidden Delete Form --}}
                             <form id="delete-specialty-form" action="{{ route('specialties.destroy', $spec->slug) }}"

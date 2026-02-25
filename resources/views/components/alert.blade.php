@@ -16,7 +16,9 @@
                 @if (session('error'))
                     {{ session('error') }}
                 @else
-                    Please check the form for errors.
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}
+                    @endforeach
                 @endif
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -41,3 +43,23 @@
 
     </div>
 @endif
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ابحث عن كل التنبيهات التي تظهر في الصفحة
+        const alerts = document.querySelectorAll('.alert');
+
+        alerts.forEach(function(alert) {
+            // انتظر 5 ثوانٍ (5000 ميلي ثانية) قبل البدء في الإخفاء
+            setTimeout(function() {
+                // إضافة تأثير اختفاء ناعم (Fade out)
+                alert.style.transition = "opacity 0.6s ease";
+                alert.style.opacity = "0";
+                
+                // حذف العنصر تماماً من الصفحة بعد انتهاء تأثير الاختفاء
+                setTimeout(function() {
+                    alert.remove();
+                }, 600); 
+            }, 5000);
+        });
+    });
+</script>

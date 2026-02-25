@@ -21,6 +21,9 @@ class Nav extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.dashboard.nav');
+        $notifications = auth()->user()->doctor->unreadNotifications()->limit(5)->get();
+        $newCount = auth()->user()->doctor->unreadNotifications()->count();
+        
+        return view('components.dashboard.nav', compact('notifications', 'newCount'));
     }
 }

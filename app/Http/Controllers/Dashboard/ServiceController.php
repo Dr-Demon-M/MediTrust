@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller
 {
+
+public function __construct() 
+{
+    $this->authorizeResource(Service::class, 'service');
+}
     /**
      * Display a listing of the resource.
      */
@@ -72,12 +77,10 @@ class ServiceController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'specialty_id' => 'required|exists:specialties,id',
-            'duration' => 'required|integer|in:15,30,45,60',
             'price' => 'required|numeric|min:0',
-            'featured_service' => 'sometimes|boolean',
         ]);
         $service->update($validatedData);
+
         return redirect()->route('services.index')->with('success', 'Service updated successfully!');
     }
 

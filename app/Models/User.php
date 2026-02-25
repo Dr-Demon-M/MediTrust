@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable /* implements MustVerifyEmail */
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasApiTokens;
@@ -49,20 +49,28 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
 
-    public function profile() {
+    public function profile()
+    {
         return $this->hasone(Profile::class);
     }
 
-    public function tasks() {
+    public function tasks()
+    {
         return $this->hasMany(Task::class);
     }
 
-    public function addtasktofav(){
+    public function addtasktofav()
+    {
         return $this->belongsToMany(Task::class, 'favorites');
     }
 
     public function doctor()
     {
         return $this->hasOne(Doctor::class);
+    }
+
+    public function todos()
+    {
+        return $this->hasMany(Todo::class);
     }
 }

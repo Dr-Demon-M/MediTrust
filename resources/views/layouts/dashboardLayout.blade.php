@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>MediTrust</title>
     <link rel="stylesheet" href="{{ asset('vendors/feather/feather.css') }}">
@@ -34,8 +35,11 @@
             @yield('content')
         </div>
     </div>
+    @vite(['resources/js/app.js'])
 
-  
+    <script>
+        window.userId = {{ auth()->user()->doctor->id }};
+    </script>
     <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
     <script src="{{ asset('vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('vendors/chart.js/chart.umd.js') }}"></script>
@@ -49,6 +53,74 @@
     <script src="{{ asset('js/dashboard.js') }}"></script>
     <script src="{{ asset('js/Chart.roundedBarCharts.js') }}"></script>
     @stack('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            if (!window.Echo || !window.userId) {
+                console.error('Echo or userId not ready');
+                return;
+            }
+
+            window.Echo.private(`App.Models.Doctor.${window.userId}`)
+                .notification((notification) => {
+
+                    console.log('Realtime notification:', notification);
+
+                    // تحديث العداد
+                    let badge = document.querySelector('.notification-badge');
+                    let count = badge ? parseInt(badge.innerText) : 0;
+
+                    if (badge) {
+                        badge.innerText = count + 1;
+                    } else {
+                        document.querySelector('#notificationDropdown')
+                            .insertAdjacentHTML('beforeend',
+                                `<span class="notification-badge">1</span>`
+                            );
+                    }
+                    let dropdownBadge = document.getElementById('dropdownNotificationCount');
+
+                    if (dropdownBadge) {
+                        let current = parseInt(dropdownBadge.innerText || 0);
+                        dropdownBadge.innerText = current + 1;
+                    }
+                    // 🔥 هنا التصحيح
+                    let container = document.querySelector('.notification-body');
+
+                    if (!container) {
+                        console.error('Notification container not found');
+                        return;
+                    }
+
+                    let html = `
+                <a href="/appointments/${notification.appointment_id}"
+                   class="notification-item unread d-flex px-4 py-3">
+
+                    <div class="notification-icon me-3">
+                        <i class="mdi mdi-calendar-check"></i>
+                    </div>
+
+                    <div>
+                        <div class="notification-title">
+                            Appointment Updated
+                        </div>
+
+                        <div class="notification-subtitle">
+                            ${notification.patient_name}
+                        </div>
+
+                        <div class="notification-time">
+                            Just now
+                        </div>
+                    </div>
+                </a>
+            `;
+
+                    container.insertAdjacentHTML('afterbegin', html);
+                });
+
+        });
+    </script>
 </body>
 
 </html>

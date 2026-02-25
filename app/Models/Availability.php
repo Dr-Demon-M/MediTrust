@@ -16,9 +16,13 @@ class Availability extends Model
         });
     }
 
-    public function doctor() {
+    public function doctor()
+    {
         return $this->belongsTo(Doctor::class);
     }
 
-
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

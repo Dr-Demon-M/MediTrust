@@ -1,5 +1,5 @@
 <!-- partial:partials/_sidebar.html -->
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
+<nav class="sidebar sidebar-offcanvas no-print m-1" id="sidebar">
     <ul class="nav">
         <li class="nav-item">
             <a class="nav-link" href="{{ route('dashboard') }}">
@@ -64,15 +64,12 @@
             <div class="collapse" id="tables">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link"
-                            href="pages/tables/basic-table.html">{{ __('All Appointments') }}</a>
+                            href="{{ route('appointments.index') }}">{{ __('All Appointments') }}</a>
                     </li>
                     <li class="nav-item"> <a class="nav-link"
-                            href="pages/tables/basic-table.html">{{ __('Today’s Appointments') }}</a></li>
+                            href="{{ route('appointments.today') }}">{{ __('Today’s Appointments') }}</a></li>
                     <li class="nav-item"> <a class="nav-link"
-                            href="pages/tables/basic-table.html">{{ __('Pending Requests') }}</a>
-                    </li>
-                    <li class="nav-item"> <a class="nav-link"
-                            href="pages/tables/basic-table.html">{{ __('Calendar View') }}</a>
+                            href="{{ route('appointments.pending') }}">{{ __('Pending Requests') }}</a>
                     </li>
                 </ul>
             </div>
@@ -86,10 +83,10 @@
             <div class="collapse" id="icons">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link"
-                            href="pages/icons/font-awesome.html">{{ __('All Patients') }}</a>
+                            href="{{ route('patients.index') }}">{{ __('All Patients') }}</a>
                     </li>
                     <li class="nav-item"> <a class="nav-link"
-                            href="pages/icons/font-awesome.html">{{ __('Consultation') }}</a>
+                            href="{{ route('patients.consultation') }}">{{ __('Consultation') }}</a>
                     </li>
                 </ul>
             </div>

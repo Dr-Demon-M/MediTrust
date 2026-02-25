@@ -11,13 +11,16 @@ use Illuminate\Support\Str;
 
 class SpecialtyController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->authorizeResource(Specialty::class, 'specialty');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $specialties = specialty::all();
+        $specialties = Specialty::all();
         return view('dashboard.specialties.index', compact('specialties'));
     }
 
@@ -43,9 +46,9 @@ class SpecialtyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $slug)
+    public function show(Specialty $specialty)
     {
-        $specialty = Specialty::where('slug', $slug)->with('doctors')->first();
+        $specialty = Specialty::where('slug', $specialty->slug)->with('doctors')->first();
         $avgWaitTime = rand(10, 20);
         $availabilities = Availability::where('status', 'Occupied')
             ->whereHas('doctor', function ($query) use ($specialty) {
@@ -58,18 +61,19 @@ class SpecialtyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $slug)
+    public function edit(Specialty $specialty)
     {
-        $specialty = Specialty::where('slug', $slug)->firstOrFail();
+        @dd($specialty);
+
         return view('Dashboard.specialties.edit', compact('specialty'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $slug)
+    public function update(Request $request, Specialty $specialty)
     {
-        $specialty = Specialty::where('slug', $slug)->firstOrFail();
+        $specialty = Specialty::where('slug', $specialty->slug)->firstOrFail();
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -84,16 +88,14 @@ class SpecialtyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $slug)
+    public function destroy(Specialty $specialty)
     {
-        $specialty = Specialty::where('slug', $slug)->firstOrFail();
         $specialty->delete();
         return redirect()->route('specialties.index')->with('delete', 'Specialty Deleted Successfully');
     }
 
-    public function showNewAppointmentForm(string $slug)
+    public function showNewAppointmentForm(Specialty $specialty)
     {
-        $specialty = Specialty::where('slug', $slug)->with('doctors')->firstOrFail();
         $doctors = $specialty->doctors()->where('status', 'active')->get();
         return view('Dashboard.specialties.new-appointment', compact('specialty', 'doctors'));
     }

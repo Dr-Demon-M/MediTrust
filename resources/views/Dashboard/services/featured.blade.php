@@ -1,9 +1,8 @@
 @extends('layouts.dashboardLayout')
 
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/featured-services.css') }}?v={{ time() }}">
     <div class="row">
-        <div class="col-12 grid-margin stretch-card">
+        <div class="col-12 grid-margin stretch-card m-1">
             <div class="card shadow-sm border-0 bg-white" style="border-radius: 15px;">
                 <div class="card-body p-4">
                     <div class="d-flex justify-content-between align-items-center mb-5 mt-2 px-2">
@@ -13,17 +12,23 @@
                             </h4>
                             <p class="text-muted small mb-0">High-priority services and special clinic programs</p>
                         </div>
-                        <button class="btn btn-outline-primary fw-bold" data-bs-toggle="modal"
-                            data-bs-target="#configureFeaturedModal" style="border-radius: 10px;">
-                            <i class="mdi mdi-settings me-2"></i>Configure Featured
-                        </button>
+                        @foreach ($specialities as $specialty)
+                            @foreach ($specialty->services as $service)
+                                @can('update', $service)
+                                    <button class="btn btn-outline-primary fw-bold" data-bs-toggle="modal"
+                                        data-bs-target="#configureFeaturedModal" style="border-radius: 10px;">
+                                        <i class="mdi mdi-settings me-2"></i>Configure Featured
+                                    </button>
+                                @endcan
+                            @endforeach
+                        @endforeach
                     </div>
                     <div class="row px-2">
                         @foreach ($specialities as $specialty)
                             @if ($specialities->count() > 0)
                                 <div class="col-md-6 col-lg-3 mb-4 d-flex align-items-stretch"> {{-- align-items-stretch توحد الطول --}}
                                     <div class="featured-box p-4 d-flex flex-column shadow-sm w-100"
-                                        style="border-radius: 15px; background: #fff; border: 1px solid #f0f0f0;">  
+                                        style="border-radius: 15px; background: #fff; border: 1px solid #f0f0f0;">
                                         <div class="text-center mb-3">
                                             <div class="featured-icon-circle mx-auto mb-2 text-primary">
                                                 <i class="mdi {{ $specialty->icon }}"></i>
@@ -41,7 +46,7 @@
                                         <div class="mt-4 pt-3 text-center border-top">
                                             <a href="{{ route('services.index') }}"
                                                 class="manage-btn-featured text-decoration-none fw-bold small">
-                                                MANAGE {{ strtoupper($specialty->name) }} <i
+                                                Show All {{ strtoupper($specialty->name) }} Services <i
                                                     class="mdi mdi-arrow-right ms-1"></i>
                                             </a>
                                         </div>
