@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Service Price (EGP)</label>
-                                    <input disabled type="text" name="service_price" id="service_price"
+                                    <input type="text" name="service_price" id="service_price"
                                         class="form-control rounded-3" step="0.01" required>
                                 </div>
                                 <div class="col-md-3 mb-3">

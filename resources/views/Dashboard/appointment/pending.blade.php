@@ -1,7 +1,6 @@
 @extends('layouts.dashboardLayout')
 
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/today-appointments.css') }}?v={{ time() }}">
 
     <div class="container-fluid p-0 m-1">
         <div class="row mb-4">

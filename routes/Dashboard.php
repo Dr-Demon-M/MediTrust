@@ -53,6 +53,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('patients/consultation', [PatientController::class, 'consultation'])->name('patients.consultation');
     Route::resource('patients', PatientController::class);
+    // Route::view('patients', 'dashboard.patients.index')->name('patients.index');
 
     Route::get('/api/specialties/{id}/services', function ($id) {
         return Service::where('specialty_id', $id)->get();

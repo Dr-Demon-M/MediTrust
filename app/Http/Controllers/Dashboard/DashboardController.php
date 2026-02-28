@@ -17,10 +17,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-
+        // For graph data preparation
         $startOfWeek = Carbon::now()->startOfWeek(Carbon::SUNDAY);
-        $endOfWeek   = Carbon::now()->endOfWeek(Carbon::SATURDAY);
-        // جيب عدد المرضى لكل يوم
+        $endOfWeek   = Carbon::now()->endOfWeek(Carbon::FRIDAY);
         $appointments = Appointment::select(
             DB::raw('DATE(appointment_date) as date'),
             DB::raw('count(*) as total')
@@ -28,7 +27,6 @@ class DashboardController extends Controller
             ->whereBetween('appointment_date', [$startOfWeek, $endOfWeek])
             ->groupBy('date')
             ->pluck('total', 'date');
-        // نجهز array كامل 7 أيام حتى لو مفيش بيانات
         $weekData = [];
         $labels = [];
         $period = CarbonPeriod::create($startOfWeek, $endOfWeek);
@@ -36,7 +34,7 @@ class DashboardController extends Controller
             $labels[] = $date->format('D');
             $weekData[] = $appointments[$date->format('Y-m-d')] ?? 0;
         }
-
+        
         $appointments = auth()->user()->doctor->appointments()->where('appointment_date', today())->latest()->get();
         $count = Appointment::where('appointment_date', '>=', now()->subDays(7))->count();
         $services = auth()->user()->doctor->appointments->where('appointment_date', today())->toArray();

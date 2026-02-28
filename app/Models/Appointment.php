@@ -34,15 +34,10 @@ class Appointment extends Model
         return $this->belongsTo(Doctor::class);
     }
 
-    protected $casts = [
-        'appointment_date' => 'date',
-        'appointment_time' => 'datetime:H:i',
-    ];
-
-    public function getRouteKeyName()
-    {
-        return 'id';
-    }
+        protected $casts = [
+            'appointment_date' => 'date',
+            'appointment_time' => 'datetime:H:i',
+        ];
 
     public function scopeFilter(Builder $builder, $Filters)
     {

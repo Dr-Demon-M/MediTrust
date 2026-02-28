@@ -1,7 +1,6 @@
 @extends('layouts.dashboardLayout')
 
 @section('content')
-    <link rel="stylesheet" href="{{ asset('css/add-service.css') }}?v={{ time() }}">
 
     <div class="row justify-content-center">
         <div class="col-md-8 grid-margin stretch-card">

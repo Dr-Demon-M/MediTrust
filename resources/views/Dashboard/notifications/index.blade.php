@@ -16,7 +16,7 @@
                             </p>
                         </div>
                         <div class="btn-wrapper">
-                            <form action="{{ route('notifications.markAllAsRead') }}" method="POST" class="d-inline">
+                            <form action="{{ route('notifications.markAllAsRead') }}" method="GET" class="d-inline">
                                 @csrf
                                 <button type="submit" class="btn btn-outline-primary btn-sm">
                                     <i class="mdi mdi-check-all me-1"></i> Mark all as read

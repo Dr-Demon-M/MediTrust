@@ -53,10 +53,9 @@ class AppointmentController extends Controller
     {
         DB::beginTransaction();
         try {
-            // Logic to create the appointment goes here
+
             $appointment = Appointment::create($request->validated());
             $doctor = $appointment->doctor;
-            $doctor->notify(new NewAppointmentNotification($appointment));
             AppointmentLog::create([
                 'appointment_id' => $appointment->id,
                 'action' => 'created',
@@ -72,6 +71,7 @@ class AppointmentController extends Controller
                 'notes' => 'Appointment for patient ' . $appointment->patient_name,
             ]);
             DB::commit();
+            $doctor->notify(new NewAppointmentNotification($appointment));
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', 'There is an appointment at this time, please choose another time.');

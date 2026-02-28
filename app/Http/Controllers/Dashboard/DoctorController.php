@@ -71,10 +71,6 @@ class DoctorController extends Controller
             ->where('status', 'completed')
             ->latest('appointment_time')
             ->first();
-        $lastConsultation = $doctor->appointments()
-            ->where('status', 'completed')
-            ->latest('appointment_time') // أو latest('updated_at')
-            ->first();
 
         $doctor = Doctor::where('slug', $slug)->firstOrFail();
         $rating = $doctor->rating; // 2.5
