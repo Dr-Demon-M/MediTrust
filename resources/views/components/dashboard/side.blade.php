@@ -20,7 +20,7 @@
                             href="{{ route('doctors.index') }}">{{ __('All Doctors') }}</a>
                     </li>
                     <li class="nav-item"> <a class="nav-link"
-                            href="{{ route('availability-schedule.index') }}">{{ __('Availability Schedule') }}</a></li>
+                            href="{{ route('availability.index') }}">{{ __('Availability Schedule') }}</a></li>
                 </ul>
             </div>
         </li>

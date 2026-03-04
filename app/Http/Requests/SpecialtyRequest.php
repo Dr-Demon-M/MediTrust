@@ -15,8 +15,12 @@ class SpecialtyRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255|unique:specialties,name,' . ($this->specialty ? $this->specialty->id : ''),
-            'icon' => 'nullable|string|max:100',
-            'description' => 'nullable|string|max:1000',
+            'subtitle' => 'nullable|string|max:255',
+            'icon' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'procedures_count' => 'nullable|integer',
+            'procedures_label' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
             'is_active' => 'nullable|boolean',
         ];
     }
@@ -27,6 +31,8 @@ class SpecialtyRequest extends FormRequest
             'name.required' => 'The specialty name field is required.',
             'name.unique' => 'This specialty already exists in our records.',
             'name.max' => 'The specialty name may not be greater than 255 characters.',
+            'subtitle.max' => 'The subtitle may not be greater than 255 characters.',
+            'procedures_label.max' => 'The procedures label may not be greater than 255 characters.',
             'description.max' => 'The description may not be greater than 1000 characters.',
         ];
     }

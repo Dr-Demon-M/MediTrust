@@ -60,7 +60,7 @@ class UpdateAppointmentNotification extends Notification implements ShouldQueue
             'type' => 'appointment_updated',
             'appointment_id' => $this->appointment->id,
             'patient_name' => $this->appointment->patient_name,
-            'date' => $this->appointment->appointment_date,
+            'date' => $this->appointment->appointment_datetime->toDateTimeString(),
             'message' => 'Your appointment has been updated.',
             'url' => route('appointments.show', $this->appointment->id),
         ];
@@ -72,7 +72,7 @@ class UpdateAppointmentNotification extends Notification implements ShouldQueue
             'type' => 'appointment_updated',
             'appointment_id' => $this->appointment->id,
             'patient_name' => $this->appointment->patient_name,
-            'date' => $this->appointment->appointment_date,
+            'date' => $this->appointment->appointment_datetime->toDateTimeString(),
             'message' => 'Your appointment has been updated.',
             'url' => route('appointments.show', $this->appointment->id),
         ]);

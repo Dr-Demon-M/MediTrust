@@ -32,11 +32,13 @@
                 <button onclick="window.print()" class="btn btn-outline-primary btn-sm rounded-pill px-3 me-2 no-print">
                     <i class="mdi mdi-printer me-1"></i> Print Receipt
                 </button>
-                <button type="button" class="btn btn-warning btn-icon-text rounded-pill" data-bs-toggle="modal"
-                    data-bs-target="#rescheduleModal">
-                    <i class="mdi mdi-calendar-clock btn-icon-prepend"></i>
-                    Re-schedule
-                </button>
+                @if ($appointment->status != 'cancelled' && $appointment->status != 'completed')
+                    <button type="button" class="btn btn-warning btn-icon-text rounded-pill" data-bs-toggle="modal"
+                        data-bs-target="#rescheduleModal">
+                        <i class="mdi mdi-calendar-clock btn-icon-prepend"></i>
+                        Re-schedule
+                    </button>
+                @endif
             </div>
         </div>
 
@@ -136,8 +138,8 @@
                         <div class="time-circle mx-auto mb-3">
                             <i class="mdi mdi-clock-outline"></i>
                         </div>
-                        <h5 class="fw-bold mb-1">{{ $appointment->appointment_time->format('g:i a') }}</h5>
-                        <p class="small opacity-75">{{ $appointment->appointment_date->format('j, F Y') }}</p>
+                        <h5 class="fw-bold mb-1">{{ $appointment->appointment_datetime->format('g:i a') }}</h5>
+                        <p class="small opacity-75">{{ $appointment->appointment_datetime->format('j, F Y') }}</p>
                         <hr class="bg-white opacity-25">
                         <div class="d-flex justify-content-between px-3">
                             <span class="small">Status:</span>
@@ -213,18 +215,13 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="fw-bold text-dark mb-2">New Date</label>
-                                <input type="date" name="appointment_date" class="form-control shadow-sm"
-                                    value="{{ \Carbon\Carbon::parse($appointment->appointment_time)->format('Y-m-d') }}"
-                                    min="{{ date('Y-m-d') }}" required>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label class="fw-bold text-dark mb-2">New Time</label>
-                                <input type="time" name="appointment_time" class="form-control shadow-sm"
-                                    value="{{ \Carbon\Carbon::parse($appointment->appointment_time)->format('H:i') }}"
-                                    required>
+                            <div class="col-md-12 mb-3">
+                                <label class="fw-bold text-dark mb-2">New Appointment Date & Time</label>
+                                <input type="datetime-local" name="appointment_datetime"
+                                    class="form-control shadow-sm custom-dt-edit"
+                                    min="{{ now()->format('Y-m-d\T00:00') }}" required>
+                                <small class="text-muted">Current set:
+                                    {{ \Carbon\Carbon::parse($appointment->appointment_datetime)->format('d M, Y - h:i A') }}</small>
                             </div>
                         </div>
                     </div>

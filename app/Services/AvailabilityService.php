@@ -10,12 +10,13 @@ class AvailabilityService
     public function create(Doctor $doctor, array $data)
     {
         $exists = Availability::where('doctor_id', $doctor->id)
-            ->where('day', $data['day'])
             ->where('start_time', $data['start_time'])
+            ->where('end_time', $data['end_time'])
+            ->where('status', $data['status'])
             ->exists();
 
-        if ($exists) {
-            throw new \Exception("This time is already taken.");
+            if ($exists) {
+            throw new \Exception("This time is already Busy.");
         }
 
         $data['doctor_id'] = $doctor->id;

@@ -19,8 +19,8 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Full Name</label>
-                                    <input value="{{ old('patient_name') }}" type="text" name="patient_name" class="form-control rounded-3" required
-                                        placeholder="Enter name">
+                                    <input value="{{ old('patient_name') }}" type="text" name="patient_name"
+                                        class="form-control rounded-3" required placeholder="Enter name">
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Phone Number</label>
@@ -81,15 +81,13 @@
                                     <input type="text" name="service_price" id="service_price"
                                         class="form-control rounded-3" step="0.01" required>
                                 </div>
-                                <div class="col-md-3 mb-3">
-                                    <label class="form-label">Date</label>
-                                    <input type="date" name="appointment_date" class="form-control rounded-3" required
-                                        min="{{ now()->toDateString() }}" max="{{ today()->addDays(7)->toDateString() }}">
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label class="form-label">Time</label>
-                                    <input type="time" name="appointment_time" class="form-control rounded-3" required
-                                        min="09:00" max="14:00" step="3600">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Appointment Date & Time</label>
+                                    <input type="datetime-local" name="appointment_datetime"
+                                        class="form-control rounded-3 custom-dt-picker" required
+                                        min="{{ now()->format('Y-m-d\T09:00') }}"
+                                        max="{{ now()->addDays(7)->format('Y-m-d\T14:00') }}">
+                                    <div class="form-text">Clinic hours: 09:00 AM - 02:00 PM</div>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label">Initial Status</label>
@@ -173,7 +171,7 @@
                     .catch(error => {
                         console.error('Doctor fetch error:', error);
                         doctorSelect.innerHTML =
-                        '<option value="" selected disabled>Error loading doctors</option>';
+                            '<option value="" selected disabled>Error loading doctors</option>';
                     });
             });
 

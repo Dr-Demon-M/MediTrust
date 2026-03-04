@@ -14,8 +14,15 @@ class Service extends Model
         'duration',
         'price',
         'featured_service',
+        'features',
+        'subtitle',
+        'image',
     ];
 
+    protected $casts = [
+    'features' => 'array',
+    'featured_service' => 'boolean',
+];
 
     public function specialty()
     {

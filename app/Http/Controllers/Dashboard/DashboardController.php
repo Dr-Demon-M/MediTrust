@@ -17,35 +17,58 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // For graph data preparation
+        // 1. تحديد نطاق الأسبوع
         $startOfWeek = Carbon::now()->startOfWeek(Carbon::SUNDAY);
         $endOfWeek   = Carbon::now()->endOfWeek(Carbon::FRIDAY);
+
+        // 2. جلب الإحصائيات (تعديل اسم العمود داخل DATE)
         $appointments = Appointment::select(
-            DB::raw('DATE(appointment_date) as date'),
+            DB::raw('DATE(appointment_datetime) as date'),
             DB::raw('count(*) as total')
         )
-            ->whereBetween('appointment_date', [$startOfWeek, $endOfWeek])
+            ->whereBetween('appointment_datetime', [$startOfWeek, $endOfWeek])
             ->groupBy('date')
             ->pluck('total', 'date');
+
         $weekData = [];
         $labels = [];
         $period = CarbonPeriod::create($startOfWeek, $endOfWeek);
+
         foreach ($period as $date) {
             $labels[] = $date->format('D');
+            // البحث في المصفوفة باستخدام التاريخ فقط Y-m-d
             $weekData[] = $appointments[$date->format('Y-m-d')] ?? 0;
         }
-        
-        $appointments = auth()->user()->doctor->appointments()->where('appointment_date', today())->latest()->get();
-        $count = Appointment::where('appointment_date', '>=', now()->subDays(7))->count();
-        $services = auth()->user()->doctor->appointments->where('appointment_date', today())->toArray();
+
+        // 3. مواعيد الطبيب لليوم (تعديل لفلترة التاريخ فقط من عمود الـ datetime)
+        $appointments = auth()->user()->doctor->appointments()
+            ->whereDate('appointment_datetime', today())
+            ->latest()
+            ->get();
+
+        // 4. عدد المواعيد في آخر 7 أيام
+        $count = Appointment::where('appointment_datetime', '>=', now()->subDays(7))->count();
+
+        // 5. حساب إجمالي أسعار الخدمات لليوم
+        $services = auth()->user()->doctor->appointments()
+            ->whereDate('appointment_datetime', today())
+            ->get()
+            ->toArray();
+
         $price = 0;
         foreach ($services as $service) {
             $price += $service['service_price'];
         }
+
+        // 6. قائمة المهام
         $todos = auth()->user()->todos()->latest()->get();
-        $upcomingAppointments = Appointment::whereDate('appointment_date', today())->where('status', 'pending')->with('specialty','service')->get();
-        
-        return view('Dashboard.index', compact('appointments', 'count', 'price', 'todos', 'weekData', 'labels','upcomingAppointments'));
+
+        // 7. المواعيد القادمة (Pending) لليوم في العيادة
+        $upcomingAppointments = Appointment::whereDate('appointment_datetime', today())
+            ->where('status', 'pending')
+            ->with('specialty', 'service')
+            ->get();
+        return view('Dashboard.index', compact('appointments', 'count', 'price', 'todos', 'weekData', 'labels', 'upcomingAppointments'));
     }
 
     /**

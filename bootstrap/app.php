@@ -18,8 +18,23 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->trustProxies(at: '*', headers: Request::HEADER_X_FORWARDED_HOST | Request::HEADER_X_FORWARDED_PROTO | Request::HEADER_X_FORWARDED_PORT);
         $middleware->alias([
-            'Checkuser' => CheckUserRole::class
+            'Checkuser' => CheckUserRole::class,
+            'role' => \App\Http\Middleware\RoleMiddleware::class,
         ]);
+    })
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->redirectGuestsTo(function ($request) {
+            return route('front.login');
+        });
+        $middleware->redirectUsersTo(function ($request) {
+            if (auth('web')->check()) {
+                return route('admin.dashboard');
+            }
+            if (auth('patient')->check()) {
+                return route('front.home');
+            }
+            return '/';
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

@@ -1,144 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Index - MediTrust Bootstrap Template</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-
-    <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
-
-    <!-- Main CSS File -->
-    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
-
-    <!-- =======================================================
-  * Template Name: MediTrust
-  * Template URL: https://bootstrapmade.com/meditrust-bootstrap-hospital-website-template/
-  * Updated: Jul 04 2025 with Bootstrap v5.3.7
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-
-<body class="index-page">
-
-    <header id="header" class="header d-flex align-items-center fixed-top">
-        <div
-            class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-
-            <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-                <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="assets/img/logo.webp" alt=""> -->
-                <svg class="my-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g id="bgCarrier" stroke-width="0"></g>
-                    <g id="tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                    <g id="iconCarrier">
-                        <path d="M22 22L2 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                        <path
-                            d="M17 22V6C17 4.11438 17 3.17157 16.4142 2.58579C15.8284 2 14.8856 2 13 2H11C9.11438 2 8.17157 2 7.58579 2.58579C7 3.17157 7 4.11438 7 6V22"
-                            stroke="currentColor" stroke-width="1.5"></path>
-                        <path opacity="0.5"
-                            d="M21 22V8.5C21 7.09554 21 6.39331 20.6629 5.88886C20.517 5.67048 20.3295 5.48298 20.1111 5.33706C19.6067 5 18.9045 5 17.5 5"
-                            stroke="currentColor" stroke-width="1.5"></path>
-                        <path opacity="0.5"
-                            d="M3 22V8.5C3 7.09554 3 6.39331 3.33706 5.88886C3.48298 5.67048 3.67048 5.48298 3.88886 5.33706C4.39331 5 5.09554 5 6.5 5"
-                            stroke="currentColor" stroke-width="1.5"></path>
-                        <path d="M12 22V19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-                        <path opacity="0.5" d="M10 12H14" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round"></path>
-                        <path opacity="0.5" d="M5.5 11H7" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round"></path>
-                        <path opacity="0.5" d="M5.5 14H7" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round"></path>
-                        <path opacity="0.5" d="M17 11H18.5" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round"></path>
-                        <path opacity="0.5" d="M17 14H18.5" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round"></path>
-                        <path opacity="0.5" d="M5.5 8H7" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round"></path>
-                        <path opacity="0.5" d="M17 8H18.5" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round"></path>
-                        <path opacity="0.5" d="M10 15H14" stroke="currentColor" stroke-width="1.5"
-                            stroke-linecap="round"></path>
-                        <path d="M12 9V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                        <path d="M14 7L10 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                    </g>
-                </svg>
-
-                <h1 class="sitename">MediTrust</h1>
-            </a>
-
-            <nav id="navmenu" class="navmenu">
-                <ul>
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="departments.html">Departments</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="doctors.html">Doctors</a></li>
-                    <li class="dropdown"><a href="#"><span>More Pages</span> <i
-                                class="bi bi-chevron-down toggle-dropdown"></i></a>
-                        <ul>
-                            <li><a href="department-details.html">Department Details</a></li>
-                            <li><a href="service-details.html">Service Details</a></li>
-                            <li><a href="appointment.html">Appointment</a></li>
-                            <li><a href="testimonials.html">Testimonials</a></li>
-                            <li><a href="faq.html">Frequently Asked Questions</a></li>
-                            <li><a href="gallery.html">Gallery</a></li>
-                            <li><a href="terms.html">Terms</a></li>
-                            <li><a href="privacy.html">Privacy</a></li>
-                            <li><a href="404.html">404</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="#"><span>Dropdown</span> <i
-                                class="bi bi-chevron-down toggle-dropdown"></i></a>
-                        <ul>
-                            <li><a href="#">Dropdown 1</a></li>
-                            <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i
-                                        class="bi bi-chevron-down toggle-dropdown"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Dropdown 1</a></li>
-                                    <li><a href="#">Deep Dropdown 2</a></li>
-                                    <li><a href="#">Deep Dropdown 3</a></li>
-                                    <li><a href="#">Deep Dropdown 4</a></li>
-                                    <li><a href="#">Deep Dropdown 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Dropdown 2</a></li>
-                            <li><a href="#">Dropdown 3</a></li>
-                            <li><a href="#">Dropdown 4</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-            </nav>
-
-            <a class="btn-getstarted" href="appointment.html">Appointment</a>
-
-        </div>
-    </header>
-
+@extends('layouts.frontLayout')
+@section('content')
     <main class="main">
 
         <!-- Hero Section -->
@@ -146,7 +7,8 @@
             <div class="container-fluid p-0">
                 <div class="hero-wrapper">
                     <div class="hero-image">
-                        <img src="{{ asset('assets/img/health/showcase-1.webp') }}" alt="Advanced Healthcare" class="img-fluid">
+                        <img src="{{ asset('assets/img/health/showcase-1.webp') }}" alt="Advanced Healthcare"
+                            class="img-fluid">
                     </div>
 
                     <div class="hero-content">
@@ -246,7 +108,7 @@
                             <img src="{{ asset('assets/img/health/facilities-1.webp') }}" alt="Modern Healthcare Facility"
                                 class="img-fluid rounded-3 mb-4">
                             <div class="experience-badge">
-                                <span class="years">25+</span>
+                                <span class="years">5+</span>
                                 <span class="text">Years of Excellence</span>
                             </div>
                         </div>
@@ -254,13 +116,14 @@
 
                     <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
                         <div class="about-content">
-                            <h2>Committed to Exceptional Patient Care</h2>
-                            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
-                                luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                            <h2>Comprehensive Medical Care You Can Trust</h2>
+                            <p class="lead">At our clinic, we provide comprehensive medical services tailored to
+                                individuals and families. Our multidisciplinary team ensures accurate diagnosis, effective
+                                treatment plans, and continuous follow-up to support long-term health and well-being.</p>
 
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat magna eu
-                                accumsan mattis. Duis non augue in tortor facilisis tincidunt ac sit amet sapien.
-                                Suspendisse id risus non nisi sodales condimentum.</p>
+                            <p>With over 25 years of medical excellence, we combine modern diagnostic tools with
+                                evidence-based practices to deliver safe, reliable, and patient-focused healthcare in a
+                                comfortable clinical environment.</p>
 
                             <div class="row g-4 mt-4">
                                 <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
@@ -269,7 +132,8 @@
                                             <i class="bi bi-heart-pulse"></i>
                                         </div>
                                         <h4>Compassionate Care</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        <p>We prioritize patient comfort, respectful communication, and personalized
+                                            attention to ensure every visit is handled with empathy and professionalism.</p>
                                     </div>
                                 </div>
 
@@ -279,13 +143,15 @@
                                             <i class="bi bi-star"></i>
                                         </div>
                                         <h4>Medical Excellence</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        <p>Our clinic follows strict medical protocols and utilizes modern equipment to
+                                            provide accurate diagnostics and high-quality treatment across various medical
+                                            specialties.</p>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="cta-wrapper mt-4">
-                                <a href="about.html" class="btn btn-primary">Learn More About Us</a>
+                                <a href="{{ route('front.about.index') }}" class="btn btn-primary">Learn More About Us</a>
                                 <a href="#" class="btn btn-outline">Meet Our Team</a>
                             </div>
                         </div>
@@ -344,7 +210,7 @@
                                 <h3>Cardiology</h3>
                                 <p>Comprehensive cardiovascular care with advanced diagnostic techniques and treatment
                                     options for heart conditions, ensuring optimal cardiac health for all patients.</p>
-                                <a href="department-details.html" class="btn-learn-more">
+                                <a href="#" class="btn-learn-more">
                                     <span>Learn More</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </a>
@@ -366,7 +232,7 @@
                                 <p>Expert neurological care specializing in brain and nervous system disorders,
                                     providing cutting-edge treatments and compassionate support for neurological
                                     conditions.</p>
-                                <a href="department-details.html" class="btn-learn-more">
+                                <a href="#" class="btn-learn-more">
                                     <span>Learn More</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </a>
@@ -377,8 +243,8 @@
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="department-card">
                             <div class="department-image">
-                                <img src="{{ asset('assets/img/health/orthopedics-4.webp') }}" alt="Orthopedics Department"
-                                    class="img-fluid">
+                                <img src="{{ asset('assets/img/health/orthopedics-4.webp') }}"
+                                    alt="Orthopedics Department" class="img-fluid">
                             </div>
                             <div class="department-content">
                                 <div class="department-icon">
@@ -387,7 +253,7 @@
                                 <h3>Orthopedics</h3>
                                 <p>Advanced musculoskeletal care focusing on bones, joints, and muscles with innovative
                                     surgical and non-surgical treatment approaches for mobility restoration.</p>
-                                <a href="department-details.html" class="btn-learn-more">
+                                <a href="#" class="btn-learn-more">
                                     <span>Learn More</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </a>
@@ -409,7 +275,7 @@
                                 <p>Specialized healthcare for children from infancy through adolescence, offering
                                     comprehensive medical care in a child-friendly environment with experienced
                                     pediatric specialists.</p>
-                                <a href="department-details.html" class="btn-learn-more">
+                                <a href="#" class="btn-learn-more">
                                     <span>Learn More</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </a>
@@ -431,7 +297,7 @@
                                 <p>Comprehensive cancer care with multidisciplinary approach, offering advanced
                                     treatment options, clinical trials, and compassionate support throughout the cancer
                                     journey.</p>
-                                <a href="department-details.html" class="btn-learn-more">
+                                <a href="#" class="btn-learn-more">
                                     <span>Learn More</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </a>
@@ -453,7 +319,7 @@
                                 <p>Round-the-clock emergency medical services with rapid response capabilities,
                                     state-of-the-art equipment, and experienced emergency physicians for critical care.
                                 </p>
-                                <a href="department-details.html" class="btn-learn-more">
+                                <a href="#" class="btn-learn-more">
                                     <span>Learn More</span>
                                     <i class="fas fa-arrow-right"></i>
                                 </a>
@@ -495,7 +361,7 @@
                                     <li><i class="fas fa-check-circle"></i>24/7 Emergency Care</li>
                                     <li><i class="fas fa-check-circle"></i>Preventive Screenings</li>
                                 </ul>
-                                <a href="services.html" class="service-btn">
+                                <a href="#" class="service-btn">
                                     Learn More
                                     <i class="fas fa-arrow-right"></i>
                                 </a>
@@ -518,7 +384,7 @@
                                     <li><i class="fas fa-check-circle"></i>Stroke Treatment Center</li>
                                     <li><i class="fas fa-check-circle"></i>Neurological Rehabilitation</li>
                                 </ul>
-                                <a href="services.html" class="service-btn">
+                                <a href="#" class="service-btn">
                                     Learn More
                                     <i class="fas fa-arrow-right"></i>
                                 </a>
@@ -540,7 +406,7 @@
                                     <li><i class="fas fa-check-circle"></i>Sports Medicine</li>
                                     <li><i class="fas fa-check-circle"></i>Minimally Invasive Procedures</li>
                                 </ul>
-                                <a href="services.html" class="service-btn">
+                                <a href="#" class="service-btn">
                                     Learn More
                                     <i class="fas fa-arrow-right"></i>
                                 </a>
@@ -562,7 +428,7 @@
                                     <li><i class="fas fa-check-circle"></i>Level 1 Trauma Center</li>
                                     <li><i class="fas fa-check-circle"></i>Critical Care Units</li>
                                 </ul>
-                                <a href="services.html" class="service-btn">
+                                <a href="#" class="service-btn">
                                     Learn More
                                     <i class="fas fa-arrow-right"></i>
                                 </a>
@@ -624,7 +490,8 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="doctor-card">
                             <div class="doctor-image">
-                                <img src="{{ asset('assets/img/health/staff-3.webp') }}" alt="Dr. Sarah Mitchell" class="img-fluid">
+                                <img src="{{ asset('assets/img/health/staff-3.webp') }}" alt="Dr. Sarah Mitchell"
+                                    class="img-fluid">
                                 <div class="availability-badge online">Available</div>
                             </div>
                             <div class="doctor-info">
@@ -677,7 +544,8 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="doctor-card">
                             <div class="doctor-image">
-                                <img src="{{ asset('assets/img/health/staff-1.webp') }}" alt="Dr. Emily Chen" class="img-fluid">
+                                <img src="{{ asset('assets/img/health/staff-1.webp') }}" alt="Dr. Emily Chen"
+                                    class="img-fluid">
                                 <div class="availability-badge online">Available</div>
                             </div>
                             <div class="doctor-info">
@@ -703,7 +571,8 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="doctor-card">
                             <div class="doctor-image">
-                                <img src="{{ asset('assets/img/health/staff-9.webp') }}" alt="Dr. James Thompson" class="img-fluid">
+                                <img src="{{ asset('assets/img/health/staff-9.webp') }}" alt="Dr. James Thompson"
+                                    class="img-fluid">
                                 <div class="availability-badge offline">Next: Tomorrow 9AM</div>
                             </div>
                             <div class="doctor-info">
@@ -729,7 +598,8 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="doctor-card">
                             <div class="doctor-image">
-                                <img src="{{ asset('assets/img/health/staff-5.webp') }}" alt="Dr. Lisa Anderson" class="img-fluid">
+                                <img src="{{ asset('assets/img/health/staff-5.webp') }}" alt="Dr. Lisa Anderson"
+                                    class="img-fluid">
                                 <div class="availability-badge online">Available</div>
                             </div>
                             <div class="doctor-info">
@@ -755,7 +625,8 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="doctor-card">
                             <div class="doctor-image">
-                                <img src="{{ asset('assets/img/health/staff-12.webp') }}" alt="Dr. Robert Kim" class="img-fluid">
+                                <img src="{{ asset('assets/img/health/staff-12.webp') }}" alt="Dr. Robert Kim"
+                                    class="img-fluid">
                                 <div class="availability-badge online">Available</div>
                             </div>
                             <div class="doctor-info">
@@ -797,8 +668,8 @@
                             veniam, quis nostrud exercitation ullamco laboris.</p>
 
                         <div class="cta-buttons" data-aos="fade-up" data-aos-delay="300">
-                            <a href="appointment.html" class="btn-primary">Book Appointment</a>
-                            <a href="doctors.html" class="btn-secondary">Find a Doctor</a>
+                            <a href="#" class="btn-primary">Book Appointment</a>
+                            <a href="#" class="btn-secondary">Find a Doctor</a>
                         </div>
                     </div>
                 </div>
@@ -866,7 +737,7 @@
                             </div>
                         </div>
                         <div class="col-lg-4 text-end">
-                            <a href="tel:911" class="emergency-btn">
+                            <a href="#" class="emergency-btn">
                                 <i class="bi bi-telephone-fill"></i>
                                 Call (555) 123-4567
                             </a>
@@ -902,7 +773,7 @@
                                     your nearest emergency room.</p>
                             </div>
                             <div class="alert-action">
-                                <a href="tel:911" class="btn btn-emergency">
+                                <a href="#" class="btn btn-emergency">
                                     <i class="bi bi-telephone-fill"></i>
                                     Call 911
                                 </a>
@@ -930,7 +801,7 @@
                                         <p class="hours">Open 24/7</p>
                                     </div>
                                     <div class="card-action">
-                                        <a href="tel:+15551234567" class="btn btn-contact">Call Now</a>
+                                        <a href="#" class="btn btn-contact">Call Now</a>
                                     </div>
                                 </div>
                             </div><!-- End Emergency Room Card -->
@@ -953,7 +824,7 @@
                                         <p class="hours">Mon-Sun: 7:00 AM - 10:00 PM</p>
                                     </div>
                                     <div class="card-action">
-                                        <a href="tel:+15559876543" class="btn btn-contact">Call Now</a>
+                                        <a href="#" class="btn btn-contact">Call Now</a>
                                     </div>
                                 </div>
                             </div><!-- End Urgent Care Card -->
@@ -973,7 +844,7 @@
                                         <p class="hours">Available 24/7</p>
                                     </div>
                                     <div class="card-action">
-                                        <a href="tel:+15554567890" class="btn btn-contact">Call Now</a>
+                                        <a href="#" class="btn btn-contact">Call Now</a>
                                     </div>
                                 </div>
                             </div><!-- End Nurse Helpline Card -->
@@ -993,7 +864,7 @@
                                         <p class="hours">Available 24/7</p>
                                     </div>
                                     <div class="card-action">
-                                        <a href="tel:18002221222" class="btn btn-contact">Call Now</a>
+                                        <a href="#" class="btn btn-contact">Call Now</a>
                                     </div>
                                 </div>
                             </div><!-- End Poison Control Card -->
@@ -1062,111 +933,4 @@
         </section><!-- /Emergency Info Section -->
 
     </main>
-
-    <footer id="footer" class="footer position-relative light-background">
-
-        <div class="container footer-top">
-            <div class="row gy-4">
-                <div class="col-lg-4 col-md-6 footer-about">
-                    <a href="index.html" class="logo d-flex align-items-center">
-                        <span class="sitename">MediTrust</span>
-                    </a>
-                    <div class="footer-contact pt-3">
-                        <p>A108 Adam Street</p>
-                        <p>New York, NY 535022</p>
-                        <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-                        <p><strong>Email:</strong> <span>info@example.com</span></p>
-                    </div>
-                    <div class="social-links d-flex mt-4">
-                        <a href=""><i class="bi bi-twitter-x"></i></a>
-                        <a href=""><i class="bi bi-facebook"></i></a>
-                        <a href=""><i class="bi bi-instagram"></i></a>
-                        <a href=""><i class="bi bi-linkedin"></i></a>
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Useful Links</h4>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Terms of service</a></li>
-                        <li><a href="#">Privacy policy</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><a href="#">Web Design</a></li>
-                        <li><a href="#">Web Development</a></li>
-                        <li><a href="#">Product Management</a></li>
-                        <li><a href="#">Marketing</a></li>
-                        <li><a href="#">Graphic Design</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Hic solutasetp</h4>
-                    <ul>
-                        <li><a href="#">Molestiae accusamus iure</a></li>
-                        <li><a href="#">Excepturi dignissimos</a></li>
-                        <li><a href="#">Suscipit distinctio</a></li>
-                        <li><a href="#">Dilecta</a></li>
-                        <li><a href="#">Sit quas consectetur</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Nobis illum</h4>
-                    <ul>
-                        <li><a href="#">Ipsam</a></li>
-                        <li><a href="#">Laudantium dolorum</a></li>
-                        <li><a href="#">Dinera</a></li>
-                        <li><a href="#">Trodelas</a></li>
-                        <li><a href="#">Flexo</a></li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">MyWebsite</strong> <span>All Rights
-                    Reserved</span></p>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you've purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> | <a
-                    href="https://bootstrapmade.com/tools/">DevTools</a>
-            </div>
-        </div>
-
-    </footer>
-
-    <!-- Scroll Top -->
-    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
-
-    <!-- Preloader -->
-    <div id="preloader"></div>
-
-    <!-- Vendor JS Files -->
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
-    <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
-    <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
-    <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
-
-    <!-- Main JS File -->
-    <script src="{{ asset('assets/js/main.js') }}"></script>
-
-</body>
-
-</html>
+@endsection

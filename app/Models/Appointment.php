@@ -34,10 +34,9 @@ class Appointment extends Model
         return $this->belongsTo(Doctor::class);
     }
 
-        protected $casts = [
-            'appointment_date' => 'date',
-            'appointment_time' => 'datetime:H:i',
-        ];
+    protected $casts = [
+        'appointment_datetime' => 'datetime',
+    ];
 
     public function scopeFilter(Builder $builder, $Filters)
     {

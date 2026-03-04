@@ -13,7 +13,7 @@
                         </div>
                     </div>
                     @foreach ($doctors as $doctor)
-                        <form action="{{ route('availability-schedule.add', $doctor->slug) }}" method="POST"
+                        <form action="{{ route('availability.add', $doctor->slug) }}" method="POST"
                             class="forms-sample">
                             @csrf
                     @endforeach

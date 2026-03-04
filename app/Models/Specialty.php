@@ -12,7 +12,16 @@ class Specialty extends Model
         'icon',
         'description',
         'is_active',
+        'subtitle',
+        'image',
+        'procedures_count',
+        'procedures_label',
     ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
+
 
     public function specialtyColors()
     {
@@ -41,6 +50,11 @@ class Specialty extends Model
     public function services()
     {
         return $this->hasMany(Service::class);
+    }
+
+    public function features()
+    {
+        return $this->hasMany(SpecialtyFeature::class)->orderBy('order');
     }
 
     public function getRouteKeyName()

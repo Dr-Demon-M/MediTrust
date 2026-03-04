@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DoctorRequest;
+use App\Models\Appointment;
 use App\Models\Availability;
 use App\Models\Doctor;
 use App\Models\specialty;
@@ -62,14 +63,12 @@ class DoctorController extends Controller
     public function show(Doctor $doctor)
     {
         $slug = $doctor->slug;
-        $patients = Availability::where('status', 'Occupied')
-            ->whereHas('doctor', function ($query) use ($slug) {
-                $query->where('slug', $slug);
-            })
+        $patients = Appointment::where('doctor_id', $doctor->id)
+            ->where('status', 'completed')
             ->count();
         $lastConsultation = $doctor->appointments()
             ->where('status', 'completed')
-            ->latest('appointment_time')
+            ->latest('appointment_datetime')
             ->first();
 
         $doctor = Doctor::where('slug', $slug)->firstOrFail();
@@ -77,7 +76,7 @@ class DoctorController extends Controller
         $fullStars = floor($rating); // 2   
         $halfStar = ($rating - $fullStars) >= 0.5 ? 1 : 0; // 1
         $emptyStars = 5 - ($fullStars + $halfStar); // 2
-        return view('Dashboard.Doctors.show', compact('doctor', 'rating', 'fullStars', 'halfStar', 'emptyStars', 'patients','lastConsultation'));
+        return view('Dashboard.Doctors.show', compact('doctor', 'rating', 'fullStars', 'halfStar', 'emptyStars', 'patients', 'lastConsultation'));
     }
 
     /**

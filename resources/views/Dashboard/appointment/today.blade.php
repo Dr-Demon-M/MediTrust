@@ -75,7 +75,7 @@
                         <tbody>
                             @forelse ($confirmedAppointments as $appointment)
                                 <tr class="current-row">
-                                    <td class="fw-bold text-primary">{{ $appointment->appointment_time->format('g:i A') }}
+                                    <td class="fw-bold text-primary">{{ $appointment->appointment_datetime->format('g:i A') }}
                                     </td>
                                     <td>
                                         <div class="fw-bold text-dark">{{ $appointment->patient_name }}</div>

@@ -23,8 +23,10 @@ class AvailabilityRequest extends FormRequest
     {
         return [
             'day' => 'required|string|in:Saturday,Sunday,Monday,Tuesday,Wednesday,Thursday,Friday',
-            'start_time' => 'required|date_format:H:i:s|in:09:00:00,10:00:00,11:00:00,12:00:00,13:00:00,14:00:00',
-            'status' => 'required|string|in:Away,Free,Occupied',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
+            'slot_duration' => 'required|integer|min:15|max:180',
+            'status' => 'required|string|in:active,inactive',
             'notes' => 'nullable|string|max:255'
         ];
     }

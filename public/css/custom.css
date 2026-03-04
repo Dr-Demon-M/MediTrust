@@ -1413,3 +1413,346 @@ label.text-muted {
     transform: scale(1.05);
     transition: 0.2s;
 }
+
+
+/* Clinic Weekly Schedule Styling */
+.weekly-schedule-wrapper {
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.schedule-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.schedule-header h2 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for 7 days */
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.day-column {
+    background: #fff;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    min-width: 150px;
+    transition: transform 0.2s;
+}
+
+.day-column.is-today {
+    border: 2px solid #3498db;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.day-header {
+    padding: 15px 10px;
+    background: #f1f3f5;
+    text-align: center;
+    border-bottom: 1px solid #e1e4e8;
+}
+
+.day-name {
+    display: block;
+    font-weight: bold;
+    color: #34495e;
+}
+
+.day-date {
+    font-size: 0.85em;
+    color: #7f8c8d;
+}
+
+.slots-container {
+    padding: 10px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.slot-item {
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.slot-item.available {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border-left: 4px solid #4caf50;
+}
+
+.slot-item.booked {
+    background-color: #ffebee;
+    color: #c62828;
+    border-left: 4px solid #f44336;
+    cursor: not-allowed;
+}
+
+.slot-time {
+    display: block;
+    font-weight: 600;
+}
+
+.slot-status-label {
+    font-size: 0.75em;
+    opacity: 0.8;
+}
+
+.no-slots {
+    font-size: 0.8em;
+    color: #bdc3c7;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Container & Header */
+.weekly-schedule-wrapper {
+    padding: 25px;
+    background: #fdfdfd;
+}
+
+.schedule-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #edf2f7;
+    padding-bottom: 20px;
+}
+
+.date-range-badge {
+    background: #e2e8f0;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    color: #4a5568;
+    margin-top: 5px;
+}
+
+/* Add Button Styling & Animation */
+.btn-add-hours {
+    background: #2b6cb0;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(43, 108, 176, 0.2);
+}
+
+.btn-add-hours:hover {
+    background: #2c5282;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(43, 108, 176, 0.3);
+}
+
+/* Grid System */
+.week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 15px;
+    width: 100%;
+}
+
+.day-column {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    min-height: 400px;
+}
+
+.day-column.is-today {
+    border: 2px solid #4299e1;
+    background: #f7fafc;
+}
+
+/* Modal Styling */
+.clinic-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: white;
+    width: 450px;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation */
+.animate-in {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    color: #2d3748;
+}
+
+.close-btn { cursor: pointer; font-size: 1.5em; }
+
+/* Form Elements */
+.clinic-form .form-group { margin-bottom: 15px; }
+.clinic-form label { display: block; margin-bottom: 5px; font-weight: 500; color: #4a5568; }
+.clinic-form input, .clinic-form select, .clinic-form textarea {
+    width: 100%; padding: 10px; border: 1px solid #cbd5e0; border-radius: 8px;
+}
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.btn-submit {
+    width: 100%;
+    background: #48bb78;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-submit:hover { background: #38a169; }
+
+/* إضافة حالة الـ Inactive (Not Available) */
+.slot-item.inactive {
+    background-color: #edf2f7; /* رمادي فاتح */
+    color: #718096;
+    border-left: 4px solid #a0aec0;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+/* تحسين شكل الـ Status Label للحالات المختلفة */
+.slot-item.inactive .slot-status-label {
+    font-style: italic;
+    font-weight: normal;
+}
+
+.slot-item.booked {
+    border-left: 4px solid #f56565;
+}
+
+.slot-item.available {
+    border-left: 4px solid #48bb78;
+}
+
+/* تنسيق غلاف العنوان ليتناسب مع الزر */
+.day-title-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    gap: 8px;
+}
+
+/* زر الحذف الافتراضي (مخفي) */
+.btn-clear-day {
+    background: #fff5f5;
+    color: #e53e3e;
+    border: 1px solid #feb2b2;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.8em;
+    cursor: pointer;
+    opacity: 0; /* مخفي */
+    transition: all 0.2s ease-in-out;
+    position: absolute;
+    right: -25px; /* يظهر بجانب النص */
+}
+
+/* إظهار الزر عند الوقوف بالماوس على الهيدر */
+.day-header:hover .btn-clear-day {
+    opacity: 1;
+    right: 0; /* يتحرك للداخل قليلاً */
+}
+
+.btn-clear-day:hover {
+    background: #e53e3e;
+    color: white;
+}
+
+/* تحسين الهيدر ليدعم التموضع */
+.day-header {
+    position: relative;
+    padding: 15px 10px;
+    overflow: hidden; /* لمنع الزر من الخروج عن الحدود بشكل مشوه */
+}
+/* Past Time Styling */
+.slot-item.past {
+    background-color: #f8f9fa;
+    color: #adb5bd;
+    border-left: 4px solid #dee2e6;
+    cursor: default;
+    filter: grayscale(1); /* يجعل اللون باهتاً */
+    opacity: 0.7;
+}
+
+.slot-item.past .slot-status-label {
+    font-size: 0.8em;
+    text-decoration: line-through; /* اختيار اختياري: وضع خط على الكلمة */
+}
+
+/* تحسينات الحالات الأخرى */
+.slot-item.booked { border-left: 4px solid #f56565; background-color: #fff5f5; color: #c53030; }
+.slot-item.available { border-left: 4px solid #48bb78; background-color: #f0fff4; color: #2f855a; }
+.slot-item.inactive { border-left: 4px solid #a0aec0; background-color: #edf2f7; color: #4a5568; }
+
+/* style.css */
+
+.custom-datetime-input {
+    color: black;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    padding: 0.375rem 0.75rem;
+}
+
+/* لضمان توافق اللون في متصفحات معينة */
+.custom-datetime-input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(0); /* تغيير الأيقونة إذا كانت الخلفية داكنة */
+}
+
+/* clinic-style.css */
+
+.custom-dt-picker {
+    border: 2px solid #e9ecef;
+    padding: 0.6rem;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.custom-dt-picker:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* تحسين شكل أيقونة التقويم */
+.custom-dt-picker::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(0.3);
+}

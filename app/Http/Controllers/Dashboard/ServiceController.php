@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\DB;
 class ServiceController extends Controller
 {
 
-public function __construct() 
-{
-    $this->authorizeResource(Service::class, 'service');
-}
+// public function __construct() 
+// {
+//     $this->authorizeResource(Service::class, 'service');
+// }
     /**
      * Display a listing of the resource.
      */
@@ -41,11 +41,15 @@ public function __construct()
         // Validate the incoming request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'subtitle' => 'nullable|string|max:255',
             'specialty_id' => 'required|exists:specialties,id',
-            'duration' => 'required|integer|in:15,30,45,60',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'price' => 'required|numeric|min:0',
+            'duration' => 'required|integer|in:15,30,45,60',
             'featured_service' => 'sometimes|boolean',
+            'description' => 'nullable|string',
+            'features' => 'nullable|array',
+            'features.*' => 'string|max:255',
         ]);
         Service::create($validatedData);
 
@@ -76,8 +80,11 @@ public function __construct()
         $service = Service::findOrFail($id);
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'subtitle' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
+            'duration' => 'required|integer|in:15,30,45,60',
+            'featured_service' => 'sometimes|boolean',
         ]);
         $service->update($validatedData);
 

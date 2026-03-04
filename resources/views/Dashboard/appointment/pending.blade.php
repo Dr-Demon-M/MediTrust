@@ -57,8 +57,8 @@
                             @forelse ($pendingAppointments as $appointment)
                                 <tr>
                                     <td class="fw-bold">
-                                        <div class="text-dark">{{ $appointment->appointment_date->format('l') }}</div>
-                                        <small class="text-primary">{{ $appointment->appointment_time }}</small>
+                                        <div class="text-dark">{{ $appointment->appointment_datetime->format('l') }}</div>
+                                        <small class="text-primary">{{ $appointment->appointment_datetime->format('h:i A') }}</small>
                                     </td>
                                     <td>
                                         <div class="fw-bold text-dark">{{ $appointment->patient_name }}</div>

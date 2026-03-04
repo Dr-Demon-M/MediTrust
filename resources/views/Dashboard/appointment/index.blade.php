@@ -61,10 +61,10 @@
                                                 @forelse ($dayAppointments as $appointment)
                                                     <tr>
                                                         <td class="fw-bold">
-                                                            {{ \Carbon\Carbon::parse($appointment->appointment_time)->format('h:i A') }}
+                                                            {{ \Carbon\Carbon::parse($appointment->appointment_datetime)->format('h:i A') }}
                                                             <br>
                                                             <small
-                                                                class="fw-normal">{{ $appointment->appointment_date->format('j, M Y') }}</small>
+                                                                class="fw-normal">{{ $appointment->appointment_datetime->format('j, M Y') }}</small>
                                                         </td>
                                                         <td>{{ $appointment->patient_name }}</td>
                                                         <td>

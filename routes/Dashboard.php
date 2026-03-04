@@ -14,21 +14,21 @@ use App\Models\Doctor;
 use App\Models\Service;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth:web', 'verified'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/notifications/{notification}/read/{appointment}', [NotificationController::class, 'markAsRead'])->name('notifications.read');
     Route::get('/notifications/read-all', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 
-    Route::get('availability', [AvailabilityController::class, 'availabilitySchedule'])->name('availability-schedule.index');
-    Route::get('availability/{slug}', [AvailabilityController::class, 'showAvailabilitySchedule'])->name('availability-schedule.show');
-    Route::delete('availability/{slug}', [AvailabilityController::class, 'deleteAvailabilitySchedule'])->name('availability-schedule.delete');
+    Route::get('availability', [AvailabilityController::class, 'index'])->name('availability.index');
+    Route::get('availability/{slug}', [AvailabilityController::class, 'show'])->name('availability.show');
+    Route::delete('availability/{slug}/{day}', [AvailabilityController::class, 'destroy'])->name('availability.delete');
+    Route::post('availability-schedule/exception/{slug}', [AvailabilityController::class, 'add'])->name('availability.add');
 
     Route::get('profile/edit', [DoctorController::class, 'docProfile2'])->name('doc.profile.edit');
     Route::get('complete-profile', [DoctorController::class, 'docProfile'])->name('doctors.complete-profile');
     Route::resource('doctors', DoctorController::class);
 
-    Route::post('availability-schedule/exception/{slug}', [AvailabilityController::class, 'addAvailabilitySchedule'])->name('availability-schedule.add');
 
     Route::get('specialties/{slug}/new-appointment', [SpecialtyController::class, 'showNewAppointmentForm'])->name('specialties.new-appointment');
 
@@ -39,6 +39,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/services/featured', [ServiceController::class, 'updateFeatured'])
         ->name('services.update');
     Route::resource('services', ServiceController::class);
+
 
     Route::get('appointments/pending', [AppointmentController::class, 'pending'])->name('appointments.pending');
     Route::get('appointments/today', [AppointmentController::class, 'today'])->name('appointments.today');
@@ -55,10 +56,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('patients', PatientController::class);
     // Route::view('patients', 'dashboard.patients.index')->name('patients.index');
 
-    Route::get('/api/specialties/{id}/services', function ($id) {
-        return Service::where('specialty_id', $id)->get();
-    });
-    Route::get('/api/specialties/{id}/doctors', function ($id) {
-        return Doctor::where('specialty_id', $id)->get(['id', 'name']);
-    });
+});
+
+
+// API routes for dynamic dropdowns in appointment creation form
+Route::get('/api/specialties/{id}/services', function ($id) {
+    return Service::where('specialty_id', $id)->get();
+});
+Route::get('/api/specialties/{id}/doctors', function ($id) {
+    return Doctor::where('specialty_id', $id)->get(['id', 'name']);
 });

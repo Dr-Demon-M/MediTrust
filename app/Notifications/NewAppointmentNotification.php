@@ -61,7 +61,7 @@ class NewAppointmentNotification extends Notification implements ShouldQueue
             'type' => 'appointment_created',
             'appointment_id' => $this->appointment->id,
             'patient_name' => $this->appointment->patient_name,
-            'date' => $this->appointment->appointment_date,
+            'date' => $this->appointment->appointment_datetime->toDateTimeString(),
             'message' => 'New appointment booked.',
             'url' => route('appointments.show', $this->appointment->id),
         ];

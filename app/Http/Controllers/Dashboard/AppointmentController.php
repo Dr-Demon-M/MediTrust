@@ -31,7 +31,7 @@ class AppointmentController extends Controller
         $appointments = Appointment::with(['specialty', 'service'])
             ->get()
             ->groupBy(function ($appointment) {
-                return $appointment->appointment_date->format('l');
+                return $appointment->appointment_datetime->format('l');
             });
 
         return view('Dashboard.appointment.index', compact('appointments', 'weekDays'));
@@ -62,13 +62,6 @@ class AppointmentController extends Controller
                 'service_price' => $appointment->service_price,
                 'description' => 'Appointment created for patient ' . $appointment->patient_name,
                 'performed_by' => $appointment->doctor_id,
-            ]);
-            Availability::create([
-                'doctor_id' => $appointment->doctor_id,
-                'day' => $appointment->appointment_date->format('l'),
-                'start_time' => $appointment->appointment_time->format('H:i:s'),
-                'status' => 'Occupied',
-                'notes' => 'Appointment for patient ' . $appointment->patient_name,
             ]);
             DB::commit();
             $doctor->notify(new NewAppointmentNotification($appointment));
@@ -110,11 +103,16 @@ class AppointmentController extends Controller
         $maxDate = today()->addDays(7)->toDateString();
         $data = $request->validate([
             'doctor_id' => 'required|exists:doctors,id',
-            'appointment_date' => "required|date|after_or_equal:$today|before_or_equal:$maxDate",
-            'appointment_time' => 'required|date_format:H:i',
+            'appointment_datetime' => "required|date|after_or_equal:$today|before_or_equal:$maxDate",
         ]);
-
         $appointment->update($data);
+        AppointmentLog::create([
+            'appointment_id' => $appointment->id,
+            'action' => 'updated',
+            'service_price' => $appointment->service_price,
+            'description' => 'Appointment updated, The doctor changed to ' . $appointment->doctor->name . ' and the appointment date changed to ' . $appointment->appointment_datetime->format('Y-m-d H:i'),
+            'performed_by' => $appointment->doctor_id,
+        ]);
         AppointmentUpdated::dispatch($appointment);
         // event(new AppointmentUpdated($appointment));
         return redirect()->route('appointments.show', $appointment->id)->with('success', "Appointment updated successfully.");
@@ -130,19 +128,19 @@ class AppointmentController extends Controller
 
     public function today(Request $request)
     {
-        $completedAppointments = Appointment::whereDate('appointment_date', Carbon::today())
+        $completedAppointments = Appointment::whereDate('appointment_datetime', today())
             ->where('status', 'completed')
             ->with(['specialty', 'service', 'doctor'])
             ->get();
-        $confirmedAppointments = Appointment::whereDate('appointment_date', Carbon::today())
+        $confirmedAppointments = Appointment::whereDate('appointment_datetime', today())
             ->filter($request->all())
             ->where('status', 'confirmed')
             ->with(['specialty', 'service', 'doctor'])
             ->get();
-        $todayAppointments = Appointment::whereDate('appointment_date', Carbon::today())
+        $todayAppointments = Appointment::whereDate('appointment_datetime', today())
             ->with(['specialty', 'service', 'doctor'])
             ->get();
-        $pendingAppointments = Appointment::whereDate('appointment_date', Carbon::today())
+        $pendingAppointments = Appointment::whereDate('appointment_datetime', today())
             ->where('status', 'pending')
             ->with(['specialty', 'service', 'doctor'])
             ->get();
@@ -151,11 +149,11 @@ class AppointmentController extends Controller
 
     public function pending()
     {
-        $pendingAppointments = Appointment::whereDate('appointment_date', Carbon::today())
+        $pendingAppointments = Appointment::whereDate('appointment_datetime', today())
             ->where('status', 'pending')
             ->with(['specialty', 'service', 'doctor'])
             ->get();
-        $todayAppointments = Appointment::whereDate('appointment_date', Carbon::today())
+        $todayAppointments = Appointment::whereDate('appointment_datetime', today())
             ->with(['specialty', 'service', 'doctor'])
             ->get();
         return view('Dashboard.appointment.pending', compact('pendingAppointments', 'todayAppointments'));
@@ -166,6 +164,13 @@ class AppointmentController extends Controller
         $appointment = Appointment::findOrFail($id);
         $appointment->status = 'completed';
         $appointment->save();
+        AppointmentLog::create([
+            'appointment_id' => $appointment->id,
+            'action' => 'completed',
+            'service_price' => $appointment->service_price,
+            'description' => 'Appointment completed for patient ' . $appointment->patient_name,
+            'performed_by' => $appointment->doctor_id,
+        ]);
         return redirect()->back()->with('success', 'Appointment completed successfully.');
     }
     public function confirm($id)
@@ -173,6 +178,13 @@ class AppointmentController extends Controller
         $appointment = Appointment::findOrFail($id);
         $appointment->status = 'confirmed';
         $appointment->save();
+        AppointmentLog::create([
+            'appointment_id' => $appointment->id,
+            'action' => 'confirmed',
+            'service_price' => $appointment->service_price,
+            'description' => 'Appointment confirmed for patient ' . $appointment->patient_name,
+            'performed_by' => $appointment->doctor_id,
+        ]);
         return redirect()->back()->with('success', 'Appointment confirmed successfully.');
     }
 
@@ -181,6 +193,13 @@ class AppointmentController extends Controller
         $appointment = Appointment::findOrFail($id);
         $appointment->status = 'cancelled';
         $appointment->save();
+        AppointmentLog::create([
+            'appointment_id' => $appointment->id,
+            'action' => 'cancelled',
+            'service_price' => $appointment->service_price,
+            'description' => 'Appointment cancelled for patient ' . $appointment->patient_name,
+            'performed_by' => $appointment->doctor_id,
+        ]);
         return redirect()->back()->with('delete', 'Appointment cancelled successfully.');
     }
 }

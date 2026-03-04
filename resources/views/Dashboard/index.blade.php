@@ -175,8 +175,8 @@
                                                             <p>{{ $appointment->service->specialty->name }}</p>
                                                         </td>
                                                         <td>
-                                                            <h6>{{ $appointment->appointment_time->format('g:i A') }}</h6>
-                                                            <p>{{ $appointment->appointment_date->format('d M Y') }}</p>
+                                                            <h6>{{ $appointment->appointment_datetime->format('h:i A') }}</h6>
+                                                            <p>{{ $appointment->appointment_datetime->format('Y-m-d') }}</p>
                                                         </td>
                                                         <td>
                                                             <div class="badge badge-opacity-warning">
@@ -213,7 +213,6 @@
             </div>
         </div>
     @endsection
-
     @push('scripts')
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>

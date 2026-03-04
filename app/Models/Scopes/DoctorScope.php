@@ -5,6 +5,7 @@ namespace App\Models\Scopes;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
+use Illuminate\Support\Facades\Auth;
 
 class DoctorScope implements Scope
 {
@@ -13,9 +14,9 @@ class DoctorScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
-        $user = auth()->user();
-        if ($user->role != 'super_admin') {
-            $builder->where('doctor_id', $user->doctor->id);
-        }
+        // $user = Auth::guard('web')->user();
+        // if (!$user || $user->role != 'super_admin') {
+        //     $builder->where('doctor_id', $user->doctor->id);
+        // }
     }
 }

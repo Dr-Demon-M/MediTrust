@@ -17,7 +17,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <form method="GET" action="{{ route('availability-schedule.index') }}">
+                            <form method="GET" action="{{ route('availability.index') }}">
                                 <select name="specialty" style="color: black;" class="form-select shadow-none"
                                     onchange="this.form.submit()">
                                     <option value="">All</option>
@@ -39,7 +39,7 @@
                                     <th>Doctor</th>
                                     <th>Specialty</th>
                                     <th>Working Hours</th>
-                                    <th>Max Capacity</th>
+                                    <th>Pending Appointments</th>
                                     <th>Status</th>
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -51,8 +51,8 @@
                                             <div class="d-flex">
                                                 <img src="{{ $doctor->imageUrl }}" class="img-md-custom rounded-circle me-3"
                                                     alt="">
-                                                <div>
-                                                    <h6>{{ $doctor->name }}</h6>
+                                                <div style="margin: auto 0;">
+                                                    <h6 >{{ $doctor->name }}</h6>
                                                 </div>
                                             </div>
                                         </td>
@@ -68,12 +68,12 @@
                                         <td>
                                             <div class="progress progress-md" style="height: 8px;">
                                                 <div class="progress-bar bg-primary" role="progressbar"
-                                                    style="width: {{ ($doctor->availability()->where('status', 'Occupied')->count() / 42) * 100 }}%"
-                                                    aria-valuenow="{{ $doctor->availability()->where('status', 'Occupied')->count() }}"
+                                                    style="width: {{ ($doctor->appointments()->where('status', 'pending')->count() / 42) * 100 }}%"
+                                                    aria-valuenow="{{ $doctor->appointments()->where('status', 'pending')->count() }}"
                                                     aria-valuemin="0" aria-valuemax="42"></div>
                                             </div>
                                             <small
-                                                class="text-muted mt-1">{{ $doctor->availability()->where('status', 'Occupied')->count() }}</small>
+                                                class="text-muted mt-1">{{ $doctor->appointments()->where('status', 'pending')->count() }}</small>
                                         </td>
                                         <td>
                                             @if ($doctor->status == 'active')
@@ -85,7 +85,7 @@
                                         <td>
                                             @can('view', $doctor)
                                                 <div class="d-flex justify-content-center">
-                                                    <a href="{{ route('availability-schedule.show', $doctor->slug) }}"
+                                                    <a href="{{ route('availability.show', $doctor->slug) }}"
                                                         class="btn btn-light btn-sm me-2 text-primary">
                                                         <i class="mdi mdi-eye"></i> View Schedule
                                                     </a>

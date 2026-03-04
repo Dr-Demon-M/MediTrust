@@ -34,15 +34,9 @@
                             </div>
                         </div>
                         <div class="action-btns mt-3 mt-md-0">
-                            <button class="btn btn-success text-white me-2" data-bs-toggle="modal"
-                                data-bs-target="#quickBookModal">
-                                <i class="mdi mdi-calendar-plus me-1"></i> Quick Book
-                            </button>
-                            @can('updata', $doctor)
                                 <a href="{{ route('doctors.edit', $doctor->slug) }}" class="btn btn-outline-primary me-2"><i
                                         class="mdi mdi-pencil"></i> Edit
                                     Profile</a>
-                            @endcan
                         </div>
                     </div>
                 </div>
@@ -68,7 +62,7 @@
                                 </li>
                                 <li class="mb-0">
                                     <p class="text-muted mb-2">Short Bio:</p>
-                                    <p class="small text-dark lh-base ">{{ $doctor->bio ? $doctor->bio : 'No bio yet'  }}</p>
+                                    <p class="small text-dark lh-base ">{{ $doctor->bio ? $doctor->bio : 'No bio yet' }}</p>
                                 </li>
                             </ul>
                         </div>
@@ -92,7 +86,7 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <h4 class="card-title mb-0">Weekly Work Schedule</h4>
-                                <a href="{{ route('availability-schedule.show', $doctor->slug) }}"
+                                <a href="{{ route('availability.show', $doctor->slug) }}"
                                     class="btn btn-link btn-sm text-decoration-none">Show Shaduale</a>
                             </div>
                             <div class="table-responsive">
@@ -114,12 +108,14 @@
                                                     {{ \Carbon\Carbon::parse($appointment->start_time)->addHour()->format('h:i A') }}
                                                 </td>
                                                 <td>{{ $appointment->status }}</td>
-                                                <td><span class="font-weight-light">" {{ $appointment->notes }} "</span>
-                                                </td>
+                                                <td><span class="text-center font-weight-light">"
+                                                        {{ $appointment->notes ? $appointment->notes : 'No Notes for this patient' }}
+                                                        "</span></td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="4" class="text-center text-muted">No availability schedule set</td>
+                                                <td colspan="4" class="text-center text-muted">No availability schedule
+                                                    set</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
@@ -132,11 +128,11 @@
                                     <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
                                         <small>Last consultation completed</small>
                                         <span
-                                            class="text-muted small">{{ $lastConsultation ? $lastConsultation->appointment_time->diffForHumans() : 'No consultations yet' }}</span>
+                                            class="text-muted small">{{ $lastConsultation ? $lastConsultation->appointment_datetime->diffForHumans() : 'No consultations yet' }}</span>
                                     </div>
                                     <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
                                         <small>Profile details updated by Admin</small>
-                                        <span class="text-muted small">{{ $doctor->updated_at->diffForHumans(); }}</span>
+                                        <span class="text-muted small">{{ $doctor->updated_at->diffForHumans() }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -146,63 +142,5 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="quickBookModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Exception</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ route('availability-schedule.add', $doctor->slug) }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="doctor_id" value="{{ $doctor->id }}">
 
-                    <div class="modal-body">
-                        <div class="form-group mb-3">
-                            <label class="fw-bold small">Select Day</label>
-                            <select name="day" class="form-select" required style="color:black;">
-                                <option value="Saturday">Saturday</option>
-                                <option value="Sunday">Sunday</option>
-                                <option value="Monday">Monday</option>
-                                <option value="Tuesday">Tuesday</option>
-                                <option value="Wednesday">Wednesday</option>
-                                <option value="Thursday">Thursday</option>
-                                <option value="Friday">Friday</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label class="fw-bold small">Select Time Slot</label>
-                            <select name="start_time" class="form-select" required style="color:black;">
-                                <option value="09:00:00">09:00 AM</option>
-                                <option value="10:00:00">10:00 AM</option>
-                                <option value="11:00:00">11:00 AM</option>
-                                <option value="12:00:00">12:00 PM</option>
-                                <option value="13:00:00">01:00 PM</option>
-                                <option value="14:00:00">02:00 PM</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label class="fw-bold small">Reason / Status</label>
-                            <select name="status" class="form-select" style="color:black;">
-                                <option value="Occupied">Booked Appointment</option>
-                                <option value="Away">Emergency Leave / Break</option>
-                                <option value="Free">Set as Available</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="fw-bold small">Notes (Optional)</label>
-                            <textarea name="notes" class="form-control" rows="3" placeholder="e.g. Patient name or reason for change"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary text-white">Update Slot</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 @endsection

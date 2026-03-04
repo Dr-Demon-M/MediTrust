@@ -7,6 +7,7 @@ use App\Http\Requests\SpecialtyRequest;
 use App\Models\Availability;
 use App\Models\Specialty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class SpecialtyController extends Controller
@@ -39,6 +40,10 @@ class SpecialtyController extends Controller
     {
         $data = $request->validated();
         $data['slug'] = Str::slug($request->name);
+        if ($request->hasFile('image')) {
+            $path = $this->uploadImage($request);
+            $data['image'] = $path;
+        }
         Specialty::create($data);
         return redirect()->route('specialties.index')->with('success', 'Specialty Added Successfully');
     }
@@ -63,8 +68,6 @@ class SpecialtyController extends Controller
      */
     public function edit(Specialty $specialty)
     {
-        @dd($specialty);
-
         return view('Dashboard.specialties.edit', compact('specialty'));
     }
 
@@ -76,12 +79,24 @@ class SpecialtyController extends Controller
         $specialty = Specialty::where('slug', $specialty->slug)->firstOrFail();
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'subtitle' => 'nullable|string|max:255',
             'icon' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'procedures_count' => 'nullable|integer',
+            'procedures_label' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'is_active' => 'nullable|boolean',
         ]);
         if ($request->name !== $specialty->name) {
             $data['slug'] = Str::slug($request->name);
         };
+        if ($request->hasFile('image')) {
+            if ($specialty->image) {
+                Storage::disk('public')->delete($specialty->image);
+            }
+            $path = $this->uploadImage($request);
+            $data['image'] = $path;
+        }
         $specialty->update($data);
         return redirect()->route('specialties.index')->with('success', 'Specialty Updated Successfully');
     }
@@ -98,5 +113,15 @@ class SpecialtyController extends Controller
     {
         $doctors = $specialty->doctors()->where('status', 'active')->get();
         return view('Dashboard.specialties.new-appointment', compact('specialty', 'doctors'));
+    }
+
+    public function uploadImage(Request $request)
+    {
+        if (!$request->has('image')) {
+            return;
+        }
+        $file = $request->file('image');
+        $path = $file->store('specialities', 'public');
+        return $path;
     }
 }
