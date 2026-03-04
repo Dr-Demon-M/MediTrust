@@ -45,14 +45,14 @@
                                         <i class="bi bi-calendar-check-fill"></i>
                                         <div>
                                             <span class="d-block label">Date</span>
-                                            <span class="value">{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('l, d F Y') }}</span>
+                                            <span class="value">{{ \Carbon\Carbon::parse($appointment->appointment_datetime)->format('l, d F Y') }}</span>
                                         </div>
                                     </div>
                                     <div class="info-row mt-3">
                                         <i class="bi bi-clock-fill"></i>
                                         <div>
-                                            <span class="d-block label">Time Slot</span>
-                                            <span class="value">{{ \Carbon\Carbon::parse($appointment->appointment_time)->format('h:i A') }}</span>
+                                            <span class="d-block label">Time </span>
+                                            <span class="value">{{ \Carbon\Carbon::parse($appointment->appointment_datetime)->format('h:i A') }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -61,7 +61,8 @@
                             <div class="col-12 mt-4">
                                 <div class="reason-box p-3 rounded">
                                     <h6 class="fw-bold mb-2"><i class="bi bi-info-circle me-2"></i>Reason for Visit:</h6>
-                                    <p class="mb-0">{{ $appointment->reason ?? 'General Consultation' }}</p>
+                                    <p class="mb-0">{{ $appointment->specialty->name }} - {{ $appointment->service->name }}</p>
+                                    <p class="mb-0">{{ $appointment->patient_note ?? 'No additional notes provided.' }}</p>
                                 </div>
                             </div>
                         </div>
@@ -72,9 +73,16 @@
                             <i class="bi bi-qr-code-scan fs-1 opacity-25"></i>
                         </div>
                         <div class="actions d-flex gap-2">
-                            <button onclick="window.print()" class="btn btn-print">
-                                <i class="bi bi-printer me-2"></i>Print Ticket
-                            </button>
+                            @if($appointment->status !== 'cancelled')
+                                <form action="{{ route('front.appointments.update', $appointment->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to cancel this clinic appointment?')">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit" class="btn btn-cancel">
+                                        <i class="bi bi-x-circle me-2"></i>Cancel Appointment
+                                    </button>
+                                </form>
+                            @endif
+                            
                             <a href="{{ route('front.appointments.index') }}" class="btn btn-back">
                                 Back to List
                             </a>

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Symfony\Component\HttpFoundation\Request;
 
 class AppointmentRequest extends FormRequest
 {
@@ -19,16 +20,17 @@ class AppointmentRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules(Request $request): array
     {
         $today = today()->toDateString();
         $maxDate = today()->addDays(7)->toDateString();
         return [
-            'patient_name' => 'required|string|max:255',
-            'patient_phone' => 'required|string|max:20',
-            'patient_email' => 'required|email|max:255',
-            'patient_gender' => 'required|in:male,female',
-            'patient_age' => 'required|integer|min:0',
+            'patient_id' => 'nullable|exists:patients,id',
+            'patient_name'   => 'nullable|required_without:patient_id|string|max:255',
+            'patient_phone'  => 'nullable|required_without:patient_id|string|max:20',
+            'patient_email'  => 'nullable|email',
+            'patient_gender' => 'nullable|required_without:patient_id|in:male,female',
+            'patient_age'    => 'nullable|required_without:patient_id|integer|min:0|max:120',
             'specialty_id' => 'required|exists:specialties,id',
             'service_id' => 'required|exists:services,id',
             'doctor_id' => 'required|exists:doctors,id',

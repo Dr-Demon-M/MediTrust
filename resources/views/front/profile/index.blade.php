@@ -114,19 +114,12 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label small fw-bold">Blood Group</label>
-                                        <select name="blood_group" class="form-select">
-                                            <option value="A+"
-                                                {{ Auth::guard('patient')->user()->blood_group == 'A+' ? 'selected' : '' }}>
-                                                A+</option>
-                                            <option value="B+"
-                                                {{ Auth::guard('patient')->user()->blood_group == 'B+' ? 'selected' : '' }}>
-                                                B+</option>
-                                            <option value="O+"
-                                                {{ Auth::guard('patient')->user()->blood_group == 'O+' ? 'selected' : '' }}>
-                                                O+</option>
-                                            <option value="O-"
-                                                {{ Auth::guard('patient')->user()->blood_group == 'O-' ? 'selected' : '' }}>
-                                                O-</option>
+                                        <select name="blood_group" class="form-select form-control" id="blood_group">
+                                            @foreach (['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'] as $group)
+                                                <option value="{{ $group }}"
+                                                    {{ Auth::guard('patient')->user()->blood_group == $group ? 'selected' : '' }}>
+                                                    {{ $group }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-12">
@@ -147,13 +140,35 @@
                                                 </button>
                                             </div>
                                             <div id="conditions-wrapper" class="d-flex flex-wrap gap-2">
-                                                {{-- Rendered by JS --}}
                                             </div>
                                             <input type="hidden" name="medical_history" id="medical-history-json"
-                                                value="{{ Auth::guard('patient')->user()->medical_history ?? '[]' }}">
+                                                value="{{ json_encode(Auth::guard('patient')->user()->medical_history) }}">
                                         </div>
                                     </div>
+                                    @if (Auth::guard('patient')->user()->attachments)
+                                        <div class="mb-4">
+                                            <label class="fw-bold mb-2">Existing Attachments</label>
 
+                                            <div class="attachments-grid">
+
+                                                @foreach (Auth::guard('patient')->user()->attachments as $file)
+                                                    <div class="attachment-item" id="file-{{ md5($file) }}">
+
+                                                        <img src="{{ asset('storage/' . $file) }}"
+                                                            class="attachment-img">
+
+                                                        <button type="button" class="delete-attachment-btn"
+                                                            data-file="{{ $file }}"
+                                                            data-id="{{ md5($file) }}">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+
+                                                    </div>
+                                                @endforeach
+
+                                            </div>
+                                        </div>
+                                    @endif
                                     <div class="col-12">
                                         <label class="form-label small fw-bold mt-2">Medical Attachments</label>
                                         <input type="file" name="attachments[]" class="form-control" multiple>
@@ -170,7 +185,53 @@
                 </div>
             </div>
     </main>
+    <script>
+        document.querySelectorAll(".delete-attachment-btn").forEach(btn => {
 
+            btn.addEventListener("click", function() {
+
+                let file = this.dataset.file
+                let id = this.dataset.id
+
+                if (!confirm("Delete this attachment?")) return
+
+                fetch("{{ route('patients.deleteAttachment') }}", {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                        },
+
+                        body: JSON.stringify({
+                            patient_id: {{ Auth::guard('patient')->user()->id }},
+                            file: file
+                        })
+
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+
+                        console.log(data)
+
+                        if (data.success) {
+
+                            document.getElementById("file-" + id).remove()
+
+                        }
+
+                    })
+                    .catch(error => {
+
+                        console.error("Error:", error)
+
+                    })
+
+            })
+
+        })
+    </script>
     <script>
         // Preview Image
         function previewImage(input) {

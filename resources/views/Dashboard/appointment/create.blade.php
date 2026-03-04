@@ -12,39 +12,68 @@
 
                         <form action="{{ route('appointments.store') }}" method="POST">
                             @csrf
-
                             <div class="row mb-4">
                                 <div class="col-12">
                                     <h6 class="text-muted fw-bold mb-3 border-bottom pb-2">Patient Information</h6>
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    <label class="form-label">Full Name</label>
-                                    <input value="{{ old('patient_name') }}" type="text" name="patient_name"
-                                        class="form-control rounded-3" required placeholder="Enter name">
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label class="form-label">Phone Number</label>
-                                    <input type="text" name="patient_phone" class="form-control rounded-3" required
-                                        placeholder="01xxxxxxxxx">
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label class="form-label">Email Address</label>
-                                    <input type="email" name="patient_email" class="form-control rounded-3"
-                                        placeholder="email@example.com">
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label class="form-label">Gender</label>
-                                    <select name="patient_gender" class="form-select rounded-3" required
-                                        style="color:black;">
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
+
+                                {{-- Choose Existing Patient --}}
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Choose Existing Patient</label>
+                                    <select name="patient_id" id="patient-select" class="form-select rounded-3"
+                                        style="color: black;">
+                                        <option value="">-- Select Patient --</option>
+                                        @foreach ($patients as $patient)
+                                            <option value="{{ $patient->id }}">
+                                                {{ $patient->name }} ({{ $patient->phone }})
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-2 mb-3">
-                                    <label class="form-label">Age</label>
-                                    <input type="text" name="patient_age" class="form-control rounded-3" required
-                                        min="0" max="120">
+
+                                <div class="col-12 text-center mb-3">
+                                    <span class="badge bg-light text-dark px-3 py-2">OR</span>
                                 </div>
+
+                                {{-- Create New Patient --}}
+                                <div id="new-patient-form" class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Full Name</label>
+                                        <input value="{{ old('patient_name', $patient->name ?? '') }}" type="text"
+                                            name="patient_name" class="form-control rounded-3" placeholder="Enter name">
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Phone Number</label>
+                                        <input type="text" value="{{ old('patient_phone', $patient->phone ?? '') }}" name="patient_phone" class="form-control rounded-3"
+                                            placeholder="01xxxxxxxxx">
+                                    </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Email Address (optional)</label>
+                                        <input type="email" value="{{ old('patient_email', $patient->email ?? '') }}" name="patient_email" class="form-control rounded-3"
+                                            placeholder="email@example.com">
+                                    </div>
+
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">Gender</label>
+
+                                        <select name="patient_gender" class="form-select rounded-3" style="color: black;">
+                                            <option value="">Select</option>
+                                            <option value="male" {{ old('patient_gender', $patient->gender ?? '') == 'male' ? 'selected' : '' }}>Male</option>
+                                            <option value="female" {{ old('patient_gender', $patient->gender ?? '') == 'female' ? 'selected' : '' }}>Female</option>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="col-md-2 mb-3">
+                                        <label class="form-label">Age</label>
+                                        <input type="number" value="{{ old('patient_age', $patient->age ?? '') }}" name="patient_age" class="form-control rounded-3"
+                                            min="0" max="120">
+                                    </div>
+
+                                </div>
+
                             </div>
 
                             <div class="row mb-4">
@@ -79,7 +108,7 @@
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Service Price (EGP)</label>
                                     <input type="text" name="service_price" id="service_price"
-                                        class="form-control rounded-3" step="0.01" required>
+                                        class="form-control rounded-3" step="0.01" required readonly>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Appointment Date & Time</label>
@@ -180,6 +209,25 @@
                 const selectedOption = this.options[this.selectedIndex];
                 const price = selectedOption.getAttribute('data-price');
                 document.getElementById('service_price').value = price || 0;
+            });
+        </script>
+        <script>
+            document.getElementById('patient-select').addEventListener('change', function() {
+                let form = document.getElementById('new-patient-form')
+                if (this.value) {
+                    form.style.display = 'none'
+                } else {
+                    form.style.display = 'flex'
+                }
+            })
+            $('#patient-select').on('change', function() {
+                if ($(this).val()) {
+                    $('#new-patient-fields').slideUp();
+                    $('#new-patient-fields input, #new-patient-fields select').prop('disabled', true);
+                } else {
+                    $('#new-patient-fields').slideDown();
+                    $('#new-patient-fields input, #new-patient-fields select').prop('disabled', false);
+                }
             });
         </script>
     @endpush

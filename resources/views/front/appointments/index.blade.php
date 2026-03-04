@@ -45,16 +45,16 @@
                                     <div class="appointment-details">
                                         <div class="detail-item">
                                             <i class="bi bi-calendar-event me-2"></i>
-                                            <span>{{ \Carbon\Carbon::parse($appointment->appointment_date)->format('D, d M Y') }}</span>
+                                            <span>{{ \Carbon\Carbon::parse($appointment->appointment_datetime)->format('D, d M Y') }}</span>
                                         </div>
                                         <div class="detail-item">
                                             <i class="bi bi-clock me-2"></i>
-                                            <span>{{ \Carbon\Carbon::parse($appointment->appointment_time)->format('h:i A') }}</span>
+                                            <span>{{ \Carbon\Carbon::parse($appointment->appointment_datetime)->format('h:i A') }}</span>
                                         </div>
                                         @if ($appointment->reason)
                                             <div class="detail-item reason-item">
                                                 <i class="bi bi-chat-left-text me-2"></i>
-                                                <span>{{ $appointment->reason }}</span>
+                                                <span>{{ $appointment->patient_note }}</span>
                                             </div>
                                         @endif
                                     </div>

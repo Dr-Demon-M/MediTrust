@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Service;
+use App\Models\Specialty;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,7 +14,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('front.index');
+        $specialties = Specialty::take(3)->get();
+        $departments = Specialty::take(6)->get();
+        $featuredServices = Service::where('featured_service', true)->take(4)->get();
+        $allSpecialties = Specialty::all();
+        return view('front.index', compact('specialties', 'departments', 'featuredServices', 'allSpecialties'));
     }
 
     /**

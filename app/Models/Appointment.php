@@ -8,7 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'patient_id',
+        'patient_name',
+        'patient_phone',
+        'patient_email',
+        'patient_gender',
+        'patient_age',
+        'specialty_id',
+        'service_id',
+        'doctor_id',
+        'service_price',
+        'appointment_datetime',
+        'patient_notes',
+        'admin_notes',
+        'status',
+        'user_id',
+    ];
 
     protected static function booted()
     {
@@ -43,5 +59,10 @@ class Appointment extends Model
         return $builder->when($Filters['search'] ?? false, function ($builder, $value) {
             $builder->where('patient_name', 'LIKE', "%{$value}%");
         });
+    }
+
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class);
     }
 }

@@ -809,8 +809,9 @@
     text-transform: uppercase !important;
 }
 
-.status-upcoming { background: #e3f2fd !important; color: #0d6efd !important; }
+.status-pending { background: #e3f2fd !important; color: #0d6efd !important; }
 .status-completed { background: #d1e7dd !important; color: #0f5132 !important; }
+.status-confirmed { background: #d1e7dd !important; color: #0f5132 !important; }
 .status-cancelled { background: #f8d7da !important; color: #842029 !important; }
 
 /* الأزرار */
@@ -975,7 +976,7 @@
     font-size: 2.8rem !important;
     font-weight: 850 !important;
     background: linear-gradient(45deg, #2c4964, #1977cc) !important;
-    /* -webkit-background-clip: text !important; */
+    -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     letter-spacing: -1px !important;
 }
@@ -1021,8 +1022,9 @@
     background: #ffffff !important;
 }
 
-.ticket-status-badge.upcoming { color: #1977cc !important; }
-.ticket-status-badge.completed { color: #28a745 !important; }
+.ticket-status-badge.pending { color: #ffa600 !important; }
+.ticket-status-badge.confirmed { color: #249d41 !important; }
+.ticket-status-badge.completed { color: #16e947 !important; }
 .ticket-status-badge.cancelled { color: #dc3545 !important; }
 
 /* 6. بيانات الطبيب (Doctor Section) */
@@ -1128,15 +1130,12 @@
 
 /* تنسيق الصفحة العام */
 .clinic-privacy-page {
-    background-color: #f8fbff !important;
     color: #444 !important;
     line-height: 1.8 !important;
 }
 
 /* الهيدر العلوي */
 .clinic-privacy-page .page-title {
-    background: linear-gradient(135deg, #1977cc 0%, #2c4964 100%) !important;
-    color: #fff !important;
     padding: 100px 0 60px !important;
 }
 
@@ -1149,6 +1148,14 @@
     font-size: 0.9rem !important;
     opacity: 0.7 !important;
     margin-top: 10px !important;
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: 
+    color-mix(in srgb, var(--accent-color), transparent 90%);
+    border-radius: 30px;
+    color: var(--accent-color);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
 }
 
 /* كارت المحتوى الرئيسي */
@@ -1230,3 +1237,137 @@
     color: #555 !important;
     font-style: italic !important;
 }
+
+/* تنسيق زر إلغاء الموعد */
+.btn-cancel {
+    background-color: #fff;
+    color: #dc3545;
+    border: 2px solid #dc3545;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-cancel:hover {
+    background-color: #dc3545;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+    transform: translateY(-1px);
+}
+
+.btn-cancel i {
+    font-size: 1.1rem;
+}
+
+/* تنسيق إضافي لزر العودة لضمان التناسق */
+.btn-back {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.btn-back:hover {
+    background-color: #5a6268;
+    color: white;
+}
+
+.bi-shield-check::before {
+    background: linear-gradient(135deg, #1977cc 0%, #2c4964 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.attachment-card{
+    position:relative;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 6px 20px rgba(0,0,0,0.08);
+    transition:0.2s;
+}
+
+.attachment-card:hover{
+    transform:translateY(-3px);
+}
+
+.attachment-img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+}
+
+.delete-btn{
+    position:absolute;
+    top:8px;
+    right:8px;
+    background:#ff4d4f;
+    border:none;
+    color:white;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.delete-btn:hover{
+    background:#d9363e;
+}
+/* Attachments Grid */
+
+.attachments-grid{
+display:flex;
+flex-wrap:wrap;
+gap:15px;
+}
+
+.attachment-item{
+position:relative;
+width:130px;
+height:130px;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 4px 15px rgba(0,0,0,0.08);
+transition:0.25s;
+}
+
+.attachment-item:hover{
+transform:translateY(-3px);
+}
+
+.attachment-img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.delete-attachment-btn{
+position:absolute;
+top:6px;
+right:6px;
+background:#ff4d4f;
+border:none;
+color:white;
+width:28px;
+height:28px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+}
+
+.delete-attachment-btn:hover{
+background:#d9363e;
+}
+

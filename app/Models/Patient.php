@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class Patient extends Authenticatable implements MustVerifyEmail
 {
@@ -32,8 +33,20 @@ class Patient extends Authenticatable implements MustVerifyEmail
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'medical_history' => 'array',
         'attachments' => 'array',
     ];
+
+    public function getImageUrlAttribute()
+    {
+        if (!$this->profile_image) {
+            return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=random&size=150';
+        }
+        if (Str::startsWith($this->profile_image, ['https://', 'http://'])) {
+            return $this->profile_image;
+        }
+        return asset('storage/' . $this->profile_image);
+    }
     // Relationships
     public function appointments()
     {

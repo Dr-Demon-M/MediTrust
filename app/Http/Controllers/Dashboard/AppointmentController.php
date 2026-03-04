@@ -8,6 +8,7 @@ use App\Http\Requests\AppointmentRequest;
 use App\Models\Appointment;
 use App\Models\AppointmentLog;
 use App\Models\Availability;
+use App\Models\Patient;
 use App\Models\Specialty;
 use App\Notifications\NewAppointmentNotification;
 use Carbon\Carbon;
@@ -43,7 +44,8 @@ class AppointmentController extends Controller
     public function create()
     {
         $specialties = Specialty::all();
-        return view('Dashboard.appointment.create', compact('specialties'));
+        $patients = Patient::all();
+        return view('Dashboard.appointment.create', compact('specialties', 'patients'));
     }
 
     /**
@@ -53,8 +55,16 @@ class AppointmentController extends Controller
     {
         DB::beginTransaction();
         try {
-
-            $appointment = Appointment::create($request->validated());
+            $data = $request->validated();
+            if ($request->filled('patient_id')) {
+                $patient = Patient::findOrFail($request->patient_id);
+                $data['patient_name'] = $patient->name;
+                $data['patient_phone'] = $patient->phone;
+                $data['patient_email'] = $patient->email;
+                $data['patient_gender'] = $patient->gender;
+                $data['patient_age'] = $patient->age;
+            }
+            $appointment = Appointment::create($data);
             $doctor = $appointment->doctor;
             AppointmentLog::create([
                 'appointment_id' => $appointment->id,

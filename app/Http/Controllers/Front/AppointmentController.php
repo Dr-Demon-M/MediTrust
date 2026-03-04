@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AppointmentRequest;
 use App\Models\Appointment;
 use App\Models\AppointmentLog;
 use App\Models\Specialty;
 use App\Notifications\NewAppointmentNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AppointmentController extends Controller
@@ -17,7 +19,8 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::all();
+        $appointments = Appointment::where('patient_id', Auth::guard('patient')->id())->with(['doctor', 'specialty', 'service'])->get();
+        // @dd($appointments);
         return view('front.appointments.index', compact('appointments'));
     }
 
@@ -33,11 +36,13 @@ class AppointmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AppointmentRequest $request)
     {
         DB::beginTransaction();
         try {
-            $appointment = Appointment::create($request->validated());
+            $data = $request->validated();
+            $data['patient_id'] = Auth::guard('patient')->id() ? Auth::guard('patient')->id() : null;
+            $appointment = Appointment::create($data);
             $doctor = $appointment->doctor;
             AppointmentLog::create([
                 'appointment_id' => $appointment->id,
@@ -50,7 +55,7 @@ class AppointmentController extends Controller
             $doctor->notify(new NewAppointmentNotification($appointment));
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'There is an appointment at this time, please choose another time.');
+            return back()->with('error', $e->getMessage());
         }
         return redirect()->route('front.appointments.create')->with('success', 'Appointment created successfully.');
     }
@@ -60,7 +65,7 @@ class AppointmentController extends Controller
      */
     public function show(string $id)
     {
-        $appointment = Appointment::findOrFail($id);
+        $appointment = Appointment::with(['doctor', 'specialty', 'service'])->findOrFail($id);
         return view('front.appointments.show', compact('appointment'));
     }
 
@@ -77,7 +82,17 @@ class AppointmentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $appointment = Appointment::findOrFail($id);
+        $appointment->status = 'cancelled';
+        $appointment->save();
+        AppointmentLog::create([
+            'appointment_id' => $appointment->id,
+            'action' => 'cancelled',
+            'service_price' => $appointment->service_price,
+            'description' => 'Appointment cancelled by patient ( ' . $appointment->patient_name . ' )',
+            'performed_by' => $appointment->patient_id,
+        ]);
+        return redirect()->route('front.appointments.show', $id)->with('error', 'Appointment cancelled successfully.');
     }
 
     /**

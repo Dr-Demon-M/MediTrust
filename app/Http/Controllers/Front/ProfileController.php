@@ -30,11 +30,13 @@ class ProfileController extends Controller
             'address' => 'nullable|string|max:255',
         ]);
         $image = $request->file('profile_image');
-        $attachments = $request->file('attachments');
+        if ($request->hasFile('attachments')) {
+            $attachments = $request->file('attachments');
 
-        foreach ($attachments as $attachment) {
-            $path = $attachment->store('patients/attachments', 'public');
-            $validated['attachments'][] = $path;
+            foreach ($attachments as $attachment) {
+                $path = $attachment->store('patients/attachments', 'public');
+                $validated['attachments'][] = $path;
+            }
         }
 
         if ($image) {

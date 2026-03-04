@@ -2,7 +2,6 @@
 
 @section('content')
     <main class="main">
-
         <div class="page-title">
             <div class="breadcrumbs">
                 <nav aria-label="breadcrumb">
@@ -66,26 +65,40 @@
                                 <div class="row gy-3">
                                     <div class="col-md-6">
                                         <input type="text" name="patient_name" class="form-control"
-                                            placeholder="Your Full Name" required>
+                                            placeholder="Your Full Name" required
+                                            @if (Auth::guard('patient')->check()) value="{{ Auth::guard('patient')->user()->name }}" readonly @endif>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="email" name="patient_email" class="form-control"
-                                            placeholder="Your Email" required>
+                                            placeholder="Your Email" required
+                                            @if (Auth::guard('patient')->check()) value="{{ Auth::guard('patient')->user()->email }}" readonly @endif>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="tel" name="patient_phone" class="form-control"
-                                            placeholder="Your Phone Number" required>
+                                            placeholder="Your Phone Number" required
+                                            @if (Auth::guard('patient')->check()) value="{{ Auth::guard('patient')->user()->phone }}" readonly @endif>
                                     </div>
                                     <div class="col-md-3">
                                         <input type="number" name="patient_age" class="form-control" placeholder="Age"
-                                            required min="0">
+                                            required min="0"
+                                            @if (Auth::guard('patient')->check()) value="{{ Auth::guard('patient')->user()->age }}" readonly @endif>
                                     </div>
                                     <div class="col-md-3">
-                                        <select name="patient_gender" class="form-select" required>
-                                            <option value="" selected disabled>Gender</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
+                                        <select class="form-select" @if (Auth::guard('patient')->check()) disabled @endif>
+                                            <option value="">Gender</option>
+                                            <option value="male"
+                                                {{ Auth::guard('patient')->check() && Auth::guard('patient')->user()->gender == 'male' ? 'selected' : '' }}>
+                                                Male
+                                            </option>
+                                            <option value="female"
+                                                {{ Auth::guard('patient')->check() && Auth::guard('patient')->user()->gender == 'female' ? 'selected' : '' }}>
+                                                Female
+                                            </option>
                                         </select>
+                                        @if (Auth::guard('patient')->check())
+                                            <input type="hidden" name="patient_gender"
+                                                value="{{ Auth::guard('patient')->user()->gender }}">
+                                        @endif
                                     </div>
 
                                     <div class="col-md-6">

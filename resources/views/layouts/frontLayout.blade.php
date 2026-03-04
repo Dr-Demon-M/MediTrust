@@ -31,6 +31,8 @@
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/front.css') }}" rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css" rel="stylesheet" />
+
 </head>
 
 <body class="index-page">
@@ -52,6 +54,7 @@
     <div id="preloader"></div>
 
     <!-- Vendor JS Files -->
+
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>

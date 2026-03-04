@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PatientController extends Controller
 {
@@ -12,7 +14,8 @@ class PatientController extends Controller
      */
     public function index()
     {
-        return view('Dashboard.patients.index');
+        $patients = Patient::all();
+        return view('Dashboard.patients.index', compact('patients'));
     }
 
     /**
@@ -36,7 +39,10 @@ class PatientController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $patient = Patient::findOrFail($id);
+        $attachments = $patient->attachments;
+        $history = $patient->medical_history;
+        return view('Dashboard.patients.show', compact('patient', 'attachments', 'history'));
     }
 
     /**
@@ -44,7 +50,8 @@ class PatientController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $patient = Patient::findOrFail($id);
+        return view('Dashboard.patients.edit', compact('patient'));
     }
 
     /**
@@ -52,7 +59,48 @@ class PatientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $patient = Patient::findOrFail($id);
+        $medicalHistoryArray = array_map('trim', explode(',', $request->input('medical_history')));
+        $patient->update([
+            'name' => $request->input('name'),
+            'phone' => $request->input('phone'),
+            'age' => $request->input('age'),
+            'date_of_birth' => $request->input('date_of_birth'),
+            'gender' => $request->input('gender'),
+            'blood_group' => $request->input('blood_group'),
+            'medical_history' => $medicalHistoryArray,
+            'address' => $request->input('address'),
+        ]);
+        $attachments = $patient->attachments ?? [];
+
+        /* حذف الملفات */
+        if ($request->delete_attachments) {
+
+            foreach ($request->delete_attachments as $file) {
+
+                Storage::disk('public')->delete($file);
+
+                $attachments = array_values(
+                    array_diff($attachments, [$file])
+                );
+            }
+        }
+
+        /* إضافة ملفات جديدة */
+        if ($request->hasFile('attachments')) {
+
+            foreach ($request->file('attachments') as $file) {
+
+                $path = $file->store('patients/attachments', 'public');
+
+                $attachments[] = $path;
+            }
+        }
+
+        $patient->update([
+            'attachments' => $attachments
+        ]);
+        return redirect()->route('patients.index')->with('info', 'Patient updated successfully.');
     }
 
     /**
@@ -60,11 +108,28 @@ class PatientController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $patient = Patient::findOrFail($id);
+        $patient->delete();
+        return redirect()->route('patients.index')->with('error', 'Patient deleted successfully.');
     }
 
     public function consultation()
     {
         return view('Dashboard.patients.consultation');
     }
+
+    public function deleteAttachment(Request $request)
+    {
+        $patient = Patient::findOrFail($request->patient_id);
+        $attachments = $patient->attachments ?? [];
+        Storage::disk('public')->delete($request->file);
+        $attachments = array_values(array_diff($attachments, [$request->file]));
+        $patient->update([
+            'attachments' => $attachments
+        ]);
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
 }

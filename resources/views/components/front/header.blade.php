@@ -76,10 +76,12 @@
                 <div class="d-flex align-items-center">
                     <a class="btn-getstarted d-none d-sm-block"
                         href="{{ route('front.appointments.create') }}">Appointment</a>
-                    <a href="{{ route('front.login') }}" class="ms-2">
-                        <i class="fa-regular fa-user shadow-sm"
-                            style="padding: 10px; color: var(--accent-color); font-size: 17px; border: 1px solid #eee; border-radius: 50%;"></i>
-                    </a>
+                    <div>
+                        <a href="{{ route('front.login') }}" class="ms-2">
+                            <i class="fa-regular fa-user shadow-sm"
+                                style="margin-right: 10px; height: 40px;width: 40px;padding: 9px;color: var(--accent-color);font-size: 19px;border: 1px solid #eee;border-radius: 50%;"></i>
+                        </a>
+                    </div>
                 </div>
             @else
                 <div class="dropdown patient-profile-dropdown">
@@ -113,9 +115,17 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item d-flex align-items-center py-2" href="{{ route('front.appointments.index') }}">
-                                <i class="bi bi-calendar-plus me-2 text-success"></i>
+                            <a class="dropdown-item d-flex align-items-center py-2"
+                                href="{{ route('front.appointments.index') }}">
+                                <i class="bi bi-calendar-week-fill me-2 text-secondary"></i>
                                 <span>My Appointments</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center py-2"
+                                href="{{ route('front.appointments.create') }}">
+                                <i class="bi bi-calendar-plus me-2 text-success"></i>
+                                <span>New Appointment</span>
                             </a>
                         </li>
                         <li>

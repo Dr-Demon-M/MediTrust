@@ -17,51 +17,19 @@ class DoctorController extends Controller
         return view('front.doctors.index', compact('doctors'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function search(Request $request)
     {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $query = Doctor::with('specialty');
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        if ($request->doctor_name) {
+            $query->where('name', 'like', '%' . $request->doctor_name . '%');
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        if ($request->specialty_id) {
+            $query->where('specialty_id', $request->specialty_id);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json($query->get());
     }
 }
