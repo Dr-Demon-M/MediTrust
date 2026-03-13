@@ -11,6 +11,10 @@
                 <p class="text-muted small mb-0">Reference ID: #APT-{{ $appointment->id }}</p>
             </div>
             <div class="ms-auto d-flex align-items-center">
+                <a href="{{ route('chat.clinic', $appointment->id) }}" id="openChatBtn"
+                    class="btn btn-clinic-chat rounded-pill px-3 no-print">
+                    <i class="mdi mdi-chat-processing-outline me-1"></i> Open Chat
+                </a>
                 @if (in_array($appointment->status, ['pending', 'confirmed']))
                     <form action="{{ route('appointment.completed', $appointment->id) }}" method="GET" class="d-inline">
                         @csrf

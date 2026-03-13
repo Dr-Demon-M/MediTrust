@@ -109,8 +109,8 @@
                                 <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
                                     nulla pariatur excepteur sint occaecat cupidatat non proident.</p>
                                 <div class="cta-buttons">
-                                    <a href="#" class="btn-book">Book Now</a>
-                                    <a href="#" class="btn-contact">Contact Us</a>
+                                    <a href="{{ route('front.appointments.create') }}" class="btn-book">Book Now</a>
+                                    <a href="{{route('front.contact.index')}}" class="btn-contact">Contact Us</a>
                                 </div>
                             </div>
                         </div>

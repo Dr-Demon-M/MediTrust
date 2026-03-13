@@ -57,7 +57,7 @@ class AppointmentController extends Controller
             DB::rollBack();
             return back()->with('error', $e->getMessage());
         }
-        return redirect()->route('front.appointments.create')->with('success', 'Appointment created successfully.');
+        return redirect()->route('front.appointments.show', $appointment->id)->with('success', 'Appointment created successfully.');
     }
 
     /**

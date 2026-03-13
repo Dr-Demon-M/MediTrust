@@ -47,11 +47,19 @@
             </a>
             <div class="collapse" id="charts">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link"
-                            href="{{ route('services.index') }}">{{ __('All Services') }}</a></li>
-                    <li class="nav-item"> <a class="nav-link"
-                            href="{{ route('services.featured') }}">{{ __('Featured Services') }}</a>
-                    </li>
+                    @if($user->role === 'super_admin')
+                        <li class="nav-item"> <a class="nav-link"
+                                href="{{ route('services.index') }}">{{ __('All Services') }}</a></li>
+                        <li class="nav-item"> <a class="nav-link"
+                                href="{{ route('services.featured') }}">{{ __('Featured Services') }}</a>
+                        </li>
+                    @endif
+                    @if($user->role === 'doctor')
+                        <li class="nav-item"> <a class="nav-link"
+                                href="{{ route('specialty.services') }}">{{ $user->doctor->specialty->name . ' Services' }}</a>
+                        </li>
+                    @endif
+
                 </ul>
             </div>
         </li>
@@ -92,8 +100,7 @@
             </div>
         </li>
         {{-- <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false"
-                aria-controls="auth">
+            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
                 <i class="menu-icon mdi mdi-account-circle-outline"></i>
                 <span class="menu-title">User Pages</span>
                 <i class="menu-arrow"></i>
@@ -112,13 +119,15 @@
                         </a></li>
                 </ul>
             </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="docs/documentation.html">
+        </li> --}}
+
+        {{-- <li class="nav-item">
+            <a class="nav-link" href="{{ route('chat.index') }}">
                 <i class="menu-icon mdi mdi-file-document"></i>
-                <span class="menu-title">Documentation</span>
+                <span class="menu-title">Chats</span>
             </a>
         </li> --}}
+
     </ul>
 </nav>
 <!-- partial -->

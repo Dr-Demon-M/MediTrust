@@ -133,14 +133,14 @@
                                     <i class="bi bi-telephone"></i>
                                     <div>
                                         <strong>Emergency Line</strong>
-                                        <span>+20 100 123 4567</span>
+                                        <a href="tel:+201001234567" class="text-decoration-none">+20 100 123 4567</a>
                                     </div>
                                 </div>
                                 <div class="info-item">
                                     <i class="bi bi-geo-alt"></i>
                                     <div>
                                         <strong>Location</strong>
-                                        <span>15 Ahmed Orabi St, Dokki, Giza 12611, Egypt</span>
+                                        <a href="https://maps.google.com/?q=15+Ahmed+Orabi+St,+Dokki,+Giza,+Egypt" class="text-decoration-none" target="_blank">15 Ahmed Orabi St, Dokki, Giza 12611, Egypt</a>
                                     </div>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                         <div class="appointment-card">
                             <h4>Book Your Visit</h4>
                             <p>Quick and easy online scheduling</p>
-                            <a href="#" class="btn-appointment">Book Appointment</a>
+                            <a href="{{route('front.appointments.create')}}" class="btn-appointment">Book Appointment</a>
                             <div class="contact-alternative">
                                 <span>Or call us at</span>
                                 <a href="tel:+201001234567">+20 100 123 4567</a>

@@ -52,7 +52,7 @@
                             <div class="emergency-contact mt-4" data-aos="fade-up" data-aos-delay="350">
                                 <div class="emergency-card p-3">
                                     <h6 class="mb-2"><i class="bi bi-telephone-fill me-2"></i>Emergency Hotline</h6>
-                                    <p class="mb-0">Call <strong>+20 100 123 4567</strong></p>
+                                    <a href="tel:+201001234567" class="text-decoration-none">Call <strong>+20 100 123 4567</strong></a>
                                 </div>
                             </div>
                         </div>

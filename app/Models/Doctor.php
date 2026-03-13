@@ -57,6 +57,10 @@ class Doctor extends Model
         return $this->hasMany(Appointment::class);
     }
 
+    public function conversations()
+    {
+        return $this->hasMany(Conversation::class);
+    }
     
 
     // Scopes

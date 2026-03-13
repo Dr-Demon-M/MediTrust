@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class PatientController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Patient::class, 'patient');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -37,9 +42,8 @@ class PatientController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Patient $patient)
     {
-        $patient = Patient::findOrFail($id);
         $attachments = $patient->attachments;
         $history = $patient->medical_history;
         return view('Dashboard.patients.show', compact('patient', 'attachments', 'history'));
@@ -48,18 +52,16 @@ class PatientController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Patient $patient)
     {
-        $patient = Patient::findOrFail($id);
         return view('Dashboard.patients.edit', compact('patient'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Patient $patient)
     {
-        $patient = Patient::findOrFail($id);
         $medicalHistoryArray = array_map('trim', explode(',', $request->input('medical_history')));
         $patient->update([
             'name' => $request->input('name'),
@@ -106,16 +108,16 @@ class PatientController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Patient $patient)
     {
-        $patient = Patient::findOrFail($id);
         $patient->delete();
         return redirect()->route('patients.index')->with('error', 'Patient deleted successfully.');
     }
 
     public function consultation()
     {
-        return view('Dashboard.patients.consultation');
+        $chats = auth()->user()->doctor->conversations()->with('patient')->get();
+        return view('Dashboard.patients.consultation', compact('chats'));
     }
 
     public function deleteAttachment(Request $request)
@@ -131,5 +133,4 @@ class PatientController extends Controller
             'success' => true
         ]);
     }
-
 }

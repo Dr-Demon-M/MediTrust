@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Dashboard\AppointmentController;
 use App\Http\Controllers\Dashboard\AvailabilityController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -9,13 +10,17 @@ use App\Http\Controllers\Dashboard\NotificationController;
 use App\Http\Controllers\Dashboard\PatientController;
 use App\Http\Controllers\Dashboard\ServiceController;
 use App\Http\Controllers\Dashboard\SpecialtyController;
+use App\Http\Controllers\Dashboard\SpecialtyServiceController;
 use App\Http\Controllers\TodoController;
 use App\Models\Doctor;
 use App\Models\Service;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:web', 'verified'])->prefix('admin')->group(function () {
+
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::get('/notifications/{notification}/read/{appointment}', [NotificationController::class, 'markAsRead'])->name('notifications.read');
     Route::get('/notifications/read-all', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
@@ -23,7 +28,7 @@ Route::middleware(['auth:web', 'verified'])->prefix('admin')->group(function () 
     Route::get('availability', [AvailabilityController::class, 'index'])->name('availability.index');
     Route::get('availability/{slug}', [AvailabilityController::class, 'show'])->name('availability.show');
     Route::delete('availability/{slug}/{day}', [AvailabilityController::class, 'destroy'])->name('availability.delete');
-    Route::post('availability-schedule/exception/{slug}', [AvailabilityController::class, 'add'])->name('availability.add');
+    Route::post('availability-schedule/exception/{slug}', [AvailabilityController::class, 'addAvailabilitySchedule'])->name('availability.add');
 
     Route::get('profile/edit', [DoctorController::class, 'docProfile2'])->name('doc.profile.edit');
     Route::get('complete-profile', [DoctorController::class, 'docProfile'])->name('doctors.complete-profile');
@@ -31,14 +36,16 @@ Route::middleware(['auth:web', 'verified'])->prefix('admin')->group(function () 
 
 
     Route::get('specialties/{slug}/new-appointment', [SpecialtyController::class, 'showNewAppointmentForm'])->name('specialties.new-appointment');
-
     Route::resource('specialties', SpecialtyController::class);
 
 
     Route::get('services/featured', [ServiceController::class, 'featured'])->name('services.featured');
-    Route::post('/services/featured', [ServiceController::class, 'updateFeatured'])
-        ->name('services.update');
+    Route::post('/services/featured', [ServiceController::class, 'updateFeatured'])->name('services.update');
     Route::resource('services', ServiceController::class);
+
+    Route::get('specialty/services', [SpecialtyServiceController::class, 'index'])->name('specialty.services');
+    Route::put('specialty/services/{id}', [SpecialtyServiceController::class, 'update'])->name('specialty.services.update');
+    Route::delete('specialty/services/{id}', [SpecialtyServiceController::class, 'destroy'])->name('specialty.services.destroy');
 
 
     Route::get('appointments/pending', [AppointmentController::class, 'pending'])->name('appointments.pending');
@@ -54,8 +61,12 @@ Route::middleware(['auth:web', 'verified'])->prefix('admin')->group(function () 
 
     Route::get('patients/consultation', [PatientController::class, 'consultation'])->name('patients.consultation');
     Route::resource('patients', PatientController::class);
-    // Route::view('patients', 'dashboard.patients.index')->name('patients.index');
 
+    Route::get('chat/clinic/{appointmentId}', [ChatController::class, 'doctorClinicChat'])->name('chat.clinic');
+    Route::get('chat/show/{conversationId}', [ChatController::class, 'doctorShow'])->name('chat.show');
+    Route::post('chat/add', [ChatController::class, 'send'])->name('chat.send');
+    Route::get('chat/messages/{conversationId}', [ChatController::class, 'fetchMessages'])
+        ->name('chat.messages');
 });
 
 

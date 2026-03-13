@@ -54,8 +54,7 @@
                             {{-- Image Upload --}}
                             <div class="col-md-6 mb-4">
                                 <label class="form-label fw-bold">Service Image (Optional)</label>
-                                <input type="file" name="image" class="form-control border-0 bg-light"
-                                    accept="image/*">
+                                <input type="file" name="image" class="form-control border-0 bg-light" accept="image/*">
                             </div>
 
                             {{-- Price --}}
@@ -83,7 +82,7 @@
                             {{-- Boolean: is_featured --}}
                             <div class="col-md-4 mb-4 d-flex align-items-center mt-3">
                                 <div class="form-check form-switch" style="display: flex">
-                                    <input class="form-check-input" type="checkbox" name="is_featured" id="isFeatured"
+                                    <input class="form-check-input" type="checkbox" name="featured_service" id="isFeatured"
                                         value="1" style="margin-left: 50px;">
                                     <label class="form-check-label fw-bold ms-2" for="isFeatured"
                                         style="cursor: pointer; color: #1F3BB3;">
@@ -110,8 +109,8 @@
                                 </label>
                                 <div id="features-container">
                                     <div class="input-group mb-2 feature-item">
-                                        <input type="text" name="featured_service[]"
-                                            class="form-control border-0 bg-light" placeholder="e.g. Consultation included">
+                                        <input type="text" name="features[]" class="form-control border-0 bg-light"
+                                            placeholder="e.g. Consultation included">
                                         <button class="btn btn-light text-danger border-0" type="button"
                                             onclick="removeFeatureField(this)">
                                             <i class="mdi mdi-close-circle"></i>
@@ -145,11 +144,11 @@
                 const newField = document.createElement('div');
                 newField.className = 'input-group mb-2 feature-item';
                 newField.innerHTML = `
-                <input type="text" name="featured_service[]" class="form-control border-0 bg-light" placeholder="e.g. Consultation included">
-                <button class="btn btn-light text-danger border-0" type="button" onclick="removeFeatureField(this)">
-                    <i class="mdi mdi-close-circle"></i>
-                </button>
-            `;
+                                        <input type="text" name="features[]" class="form-control border-0 bg-light" placeholder="e.g. Consultation included">
+                                        <button class="btn btn-light text-danger border-0" type="button" onclick="removeFeatureField(this)">
+                                            <i class="mdi mdi-close-circle"></i>
+                                        </button>
+                                    `;
                 container.appendChild(newField);
             }
 

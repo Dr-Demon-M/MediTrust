@@ -80,9 +80,9 @@
                             <h3>Contact Us</h3>
                             <p>If you have any questions, reach out to our support team:</p>
                             <div class="d-flex flex-wrap justify-content-center gap-4 mt-3">
-                                <span><i class="bi bi-envelope text-primary me-2"></i> support@meditrust.com</span>
-                                <span><i class="bi bi-telephone text-primary me-2"></i> +20 100 123 4567</span>
-                                <span><i class="bi bi-geo-alt text-primary me-2"></i> Cairo, Egypt</span>
+                                <a href="mailto:support@meditrust.com" class="text-decoration-none"><i class="bi bi-envelope text-primary me-2"></i> support@meditrust.com</a>
+                                <a href="tel:+201001234567" class="text-decoration-none"><i class="bi bi-telephone text-primary me-2"></i> +20 100 123 4567</a>
+                                <a href="https://maps.google.com/?q=Cairo,+Egypt" class="text-decoration-none" target="_blank"><i class="bi bi-geo-alt text-primary me-2"></i> Cairo, Egypt</a>
                             </div>
                         </div>
 

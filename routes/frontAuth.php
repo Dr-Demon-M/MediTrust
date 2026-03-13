@@ -11,7 +11,7 @@ use App\Http\Controllers\Front\Auth\RegisteredUserController;
 use App\Http\Controllers\Front\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest:patient',)->name('front.')->prefix('front')->group(function () {
+Route::middleware('guest:patient',)->name('front.')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 

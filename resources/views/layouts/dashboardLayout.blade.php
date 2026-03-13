@@ -41,7 +41,7 @@
     @vite(['resources/js/app.js'])
 
     <script>
-        window.userId = {{ auth()->user()->doctor->id }};
+        window.userId = {{ auth()->guard('web')->user()->doctor->id }};
     </script>
     <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
     <script src="{{ asset('vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
@@ -57,7 +57,7 @@
     <script src="{{ asset('js/Chart.roundedBarCharts.js') }}"></script>
     @stack('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
 
             if (!window.Echo || !window.userId) {
                 console.error('Echo or userId not ready');

@@ -195,7 +195,7 @@
 
                 if (!confirm("Delete this attachment?")) return
 
-                fetch("{{ route('patients.deleteAttachment') }}", {
+                fetch("{{ route('front.patients.deleteAttachment') }}", {
 
                         method: "POST",
 

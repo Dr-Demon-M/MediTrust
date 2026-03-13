@@ -2304,3 +2304,296 @@ transform:scale(1.05);
 .select2-selection .select2-selection--single {
     height: 39px;
 }
+
+/* التنسيق الافتراضي للزر */
+.btn-clinic-chat {
+    background-color: transparent;
+    border: 2px solid #28a745; /* إطار أخضر */
+    font-weight: 600;
+    transition: all 0.3s ease; /* تنعيم حركة الألوان */
+    display: inline-flex;
+    align-items: center;
+    padding: 8px;
+    margin-right: 3px;
+    color: #434343;
+}
+
+/* التنسيق عند تمرير الماوس (Hover) */
+.btn-clinic-chat:hover {
+    background-color: #28a745; /* خلفية خضراء */
+    color: #ffffff !important; /* نص أبيض */
+    border-color: #28a745;
+    transform: translateY(-1px); /* رفعة خفيفة للزر */
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2); /* ظل أخضر خفيف */
+}
+
+/* لضمان تغير لون الأيقونة أيضاً عند الـ Hover */
+.btn-clinic-chat:hover i {
+    color: #ffffff;
+}
+
+/* تحسين الحاوية الرئيسية */
+.clinic-chat-box {
+    border: none !important;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* تحسين الهيدر */
+.chat-header {
+    background: linear-gradient(45deg, #4b49ac, #7978e9) !important; /* لون متناسق مع الداشبورد */
+    padding: 20px !important;
+}
+
+/* منطقة الرسائل */
+.chat-body {
+    background-color: #f4f7f6 !important; /* لون خلفية أهدى للعين */
+    padding: 25px !important;
+    scroll-behavior: smooth;
+}
+
+/* فقاعة رسالة الطبيب (اليسار) */
+.doctor-msg .msg-content {
+    background-color: #ffffff !important;
+    color: #333 !important;
+    border: 1px solid #e0e0e0;
+    border-radius: 18px 18px 18px 4px !important;
+    padding: 12px 16px !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+}
+
+/* فقاعة رسالة المريض (اليمين) */
+.patient-msg .msg-content {
+    background: linear-gradient(45deg, #4b49ac, #6c63ff) !important;
+    color: #ffffff !important;
+    border-radius: 18px 18px 4px 18px !important;
+    padding: 12px 16px !important;
+    box-shadow: 0 4px 12px rgba(75, 73, 172, 0.2) !important;
+}
+
+/* توقيت الرسائل */
+.msg-time {
+    font-size: 0.65rem;
+    margin-top: 5px;
+    display: block;
+}
+
+.doctor-msg .msg-time { color: #888 !important; }
+.patient-msg .msg-time { color: rgba(255,255,255,0.8) !important; }
+
+/* الفوتر ومنطقة الإدخال */
+.chat-footer {
+    padding: 15px 25px !important;
+    background-color: #ffffff !important;
+}
+
+.chat-footer input.form-control {
+    background-color: #f8f9fa !important;
+    border: 1px solid #eee !important;
+    padding: 12px 20px !important;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.chat-footer input.form-control:focus {
+    background-color: #fff !important;
+    border-color: #4b49ac !important;
+    box-shadow: 0 0 0 0.2rem rgba(75, 73, 172, 0.1) !important;
+}
+
+/* زر الإرسال */
+.chat-footer .btn-primary {
+    background-color: #4b49ac !important;
+    border: none !important;
+    transition: transform 0.2s;
+}
+
+.chat-footer .btn-primary:hover {
+    transform: scale(1.1);
+    background-color: #3f3e91 !important;
+}
+
+/* تحسين شكل الـ Scrollbar */
+#chatWindow::-webkit-scrollbar {
+    width: 6px;
+}
+
+#chatWindow::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+#chatWindow::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+#chatWindow::-webkit-scrollbar-thumb:hover {
+    background: #4b49ac;
+}
+
+.full-inbox-container {
+    width: 100%;
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.02);
+}
+
+.inbox-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 20px;
+}
+
+.header-info h2 {
+    font-size: 1.6rem;
+    color: #1e293b;
+    margin: 0;
+}
+
+.header-info p {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin: 5px 0 0;
+}
+
+.badge {
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.badge.total { background: #f1f5f9; color: #475569; }
+.badge.pending { background: #fee2e2; color: #b91c1c; }
+
+/* Inbox List Area */
+.inbox-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.inbox-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 25px;
+    background: #fdfdfd;
+    border: 1px solid #f1f5f9;
+    border-radius: 15px;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.inbox-row:hover {
+    background: #ffffff;
+    border-color: #3b82f6;
+    transform: scale(1.005);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+}
+
+.unread-row {
+    background: #f8faff;
+    border-left: 4px solid #3b82f6;
+}
+
+/* Patient Info Section */
+.row-main {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.patient-avatar {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+.patient-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.dot-online {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    background: #22c55e;
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+
+.p-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+}
+
+.p-name {
+    font-weight: 700;
+    color: #334155;
+    font-size: 1rem;
+}
+
+.p-id {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.p-last-msg {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin: 0;
+    max-width: 500px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Time and Unread info */
+.row-info {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.p-date {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.unread-pill {
+    background: #3b82f6;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    min-width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 0 6px;
+}
+
+.next-icon {
+    color: #cbd5e1;
+    font-size: 0.85rem;
+}

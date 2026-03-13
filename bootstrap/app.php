@@ -23,18 +23,16 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withMiddleware(function (Middleware $middleware) {
+
         $middleware->redirectGuestsTo(function ($request) {
+
+            if ($request->is('admin') || $request->is('admin/*')) {
+                return route('login');
+            }
+
             return route('front.login');
         });
-        $middleware->redirectUsersTo(function ($request) {
-            if (auth('web')->check()) {
-                return route('admin.dashboard');
-            }
-            if (auth('patient')->check()) {
-                return route('front.home');
-            }
-            return '/';
-        });
+
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

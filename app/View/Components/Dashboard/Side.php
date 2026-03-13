@@ -4,6 +4,7 @@ namespace App\View\Components\Dashboard;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class Side extends Component
@@ -11,6 +12,7 @@ class Side extends Component
 
     public $active;
     public $items;
+    public $user;
     /**
      * Create a new component instance.
      */
@@ -18,6 +20,7 @@ class Side extends Component
     {
         $this->active = request()->route()->getName();
         $this->items = config('side');
+        $this->user = Auth::user();
     }
 
     /**

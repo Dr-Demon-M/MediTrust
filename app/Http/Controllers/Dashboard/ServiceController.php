@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Service;
 use App\Models\Specialty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller
 {
 
-// public function __construct() 
+    // public function __construct() 
 // {
 //     $this->authorizeResource(Service::class, 'service');
 // }
@@ -29,7 +30,12 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        $specialities = Specialty::all();
+        if (Auth::user()->role === 'super_admin') {
+            $specialities = Specialty::all();
+        } else {
+            $id = Auth::user()->doctor->specialty_id;
+            $specialities = Specialty::where('id', $id)->get();
+        }
         return view('Dashboard.services.create', compact('specialities'));
     }
 
@@ -49,11 +55,15 @@ class ServiceController extends Controller
             'featured_service' => 'sometimes|boolean',
             'description' => 'nullable|string',
             'features' => 'nullable|array',
-            'features.*' => 'string|max:255',
+            'features.*' => 'nullable|string|max:255',
         ]);
         Service::create($validatedData);
 
-        return redirect()->route('services.index')->with('success', 'Service created successfully!');
+        if (Auth::user()->role === 'super_admin') {
+            return redirect()->route('services.index')->with('success', 'Service created successfully!');
+        } else {
+            return redirect()->route('specialty.services')->with('success', 'Service created successfully!');
+        }
     }
 
     /**
@@ -104,9 +114,11 @@ class ServiceController extends Controller
 
     public function featured()
     {
-        $specialities = Specialty::with(['services' => function ($query) {
-            $query->where('featured_service', true);
-        }])->get();
+        $specialities = Specialty::with([
+            'services' => function ($query) {
+                $query->where('featured_service', true);
+            }
+        ])->get();
         return view('Dashboard.services.featured', compact('specialities'));
     }
 

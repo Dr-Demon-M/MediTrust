@@ -20,7 +20,7 @@
         <ul class="navbar-nav">
             <li class="nav-item fw-semibold d-none d-lg-block ms-0">
                 <h1 class="welcome-text">Good Morning, <span
-                        class="text-black fw-bold">Dr:{{ Auth::user()->doctor->name }}</span>
+                        class="text-black fw-bold">Dr:{{ Auth::guard('web')->user()->doctor->name }}</span>
                 </h1>
                 <h3 class="welcome-sub-text">Your performance summary this week </h3>
             </li>
@@ -145,7 +145,7 @@
                             </a>
                         </div>
                     </div>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" style="margin-bottom: 5px;">
                     <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <i class="icon-mail icon-lg"></i>
@@ -153,53 +153,36 @@
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
                         aria-labelledby="countDropdown">
                         <a class="dropdown-item py-3">
-                            <p class="mb-0 fw-medium float-start">You have 7 unread mails </p>
-                            <span class="badge badge-pill badge-primary float-end">View all</span>
+                            <p class="mb-0 fw-medium float-start">You may have new messages. </p>
+                            <span href="{{ route('patients.consultation') }}"
+                                class="badge badge-pill badge-primary float-end">View all</span>
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <img src="{{ asset('images/faces/face10.jpg') }}" alt="image"
-                                    class="img-sm profile-pic">
-                            </div>
-                            <div class="preview-item-content flex-grow py-2">
-                                <p class="preview-subject ellipsis fw-medium text-dark">Marian Garner </p>
-                                <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
-                            </div>
-                        </a>
-                        <a class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <img src="{{ asset('images/faces/face12.jpg') }}" alt="image"
-                                    class="img-sm profile-pic">
-                            </div>
-                            <div class="preview-item-content flex-grow py-2">
-                                <p class="preview-subject ellipsis fw-medium text-dark">David Grey </p>
-                                <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
-                            </div>
-                        </a>
-                        <a class="dropdown-item preview-item">
-                            <div class="preview-thumbnail">
-                                <img src="{{ asset('images/faces/face1.jpg') }}" alt="image"
-                                    class="img-sm profile-pic">
-                            </div>
-                            <div class="preview-item-content flex-grow py-2">
-                                <p class="preview-subject ellipsis fw-medium text-dark">Travis Jenkins </p>
-                                <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
-                            </div>
-                        </a>
+                        @foreach ($chats as $chat)
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <img src="{{ $chat->patient->image_url }}" alt="image" class="img-sm profile-pic">
+                                </div>
+                                <div class="preview-item-content flex-grow py-2">
+                                    <p class="preview-subject ellipsis fw-medium text-dark">{{ $chat->patient->name }}</p>
+                                    <p class="fw-light small-text mb-0"> {{ $chat->messages->last()->message }}</p>
+                                </div>
+                            </a>
+                        @endforeach
                     </div>
                 </li>
                 <li class="nav-item dropdown d-none d-lg-block user-dropdown">
-                    <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <img class="img-xs rounded-circle" src="{{ Auth()->user()->doctor->image_url }}"
-                            alt="Profile image"> </a>
+                    <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img class="img-xs rounded-circle" src="{{ Auth()->guard('web')->user()->doctor->image_url }}"
+                            alt="Profile image" style="object-fit: cover;"> </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                         <div class="dropdown-header text-center">
-                            <img class="img-xs rounded-circle" src="{{ Auth()->user()->doctor->image_url }}"
-                                alt="Profile image">
-                            <p class="mb-1 mt-3 fw-semibold">{{ Auth::user()->name }}</p>
-                            <p class="fw-light text-muted mb-0">{{ Auth::user()->email }}</p>
+                            <img class="img-xs rounded-circle"
+                                src="{{ Auth()->guard('web')->user()->doctor->image_url }}" alt="Profile image"
+                                style="object-fit: cover;">
+                            <p class="mb-1 mt-3 fw-semibol  d" style="margin-top: 6px !important;">
+                                {{ Auth()->guard('web')->user()->doctor->name }}</p>
+                            <p class="fw-light text-muted mb-0">{{ Auth()->guard('web')->user()->email }}</p>
                         </div>
                         <a href="{{ route('doc.profile.edit') }}" class="dropdown-item"><i
                                 class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i>Edit Profile</a>

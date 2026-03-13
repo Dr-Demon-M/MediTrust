@@ -37,7 +37,7 @@
                                                 <i class="bi bi-telephone-fill"></i>
                                                 <div class="badge-content">
                                                     <span>Emergency Line</span>
-                                                    <strong>+20 100 123 4567</strong>
+                                                    <a href="tel:+201001234567" class="text-decoration-none">+20 100 123 4567</a>
                                                 </div>
                                             </div>
                                             <div class="badge-item">

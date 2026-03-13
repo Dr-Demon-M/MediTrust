@@ -178,7 +178,7 @@
                     let file = this.dataset.file
                     let id = this.dataset.id
                     if (!confirm("Delete this file?")) return
-                    fetch("{{ route('patients.deleteAttachment') }}", {
+                    fetch("{{ route('front.patients.deleteAttachment') }}", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",

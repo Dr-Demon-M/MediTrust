@@ -8,7 +8,8 @@
             <div class="breadcrumbs">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('front.home') }}"><i class="bi bi-house"></i> Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('front.home') }}"><i class="bi bi-house"></i> Home</a>
+                        </li>
                         <li class="breadcrumb-item active current">Terms</li>
                     </ol>
                 </nav>
@@ -150,7 +151,7 @@
                         <div class="contact-content">
                             <h4>Questions About Terms?</h4>
                             <p>If you have any questions about these Terms, please contact us.</p>
-                            <a href="#" class="contact-link">Contact Support</a>
+                            <a href="{{route('front.contact.index')}}" class="contact-link">Contact Support</a>
                         </div>
                     </div>
                 </div>

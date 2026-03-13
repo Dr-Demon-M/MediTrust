@@ -40,7 +40,8 @@
                                         </td>
                                         <td>
                                             <h6>{{ $patient->age ? $patient->age . ' Years' : 'N/A' }} </h6>
-                                            <p class="text-muted">{{ $patient->gender ? ucfirst($patient->gender) : 'N/A' }}</p>
+                                            <p class="text-muted">{{ $patient->gender ? ucfirst($patient->gender) : 'N/A' }}
+                                            </p>
                                         </td>
                                         <td>
                                             <p class="fw-bold mb-1"><i
@@ -62,19 +63,23 @@
                                             <div class="d-flex justify-content-center">
                                                 <a href="{{ route('patients.show', $patient->id) }}"
                                                     class="btn btn-light btn-sm me-2"><i class="mdi mdi-eye"></i></a>
-                                                <a style="margin-right:8px"
-                                                    href="{{ route('patients.edit', $patient->id) }}"
-                                                    class="btn btn-light btn-sm text-primary"><i
-                                                        class="mdi mdi-pencil"></i></a>
-                                                <form action="{{ route('patients.destroy', $patient->id) }}" method="POST"
-                                                    class="d-inline"
-                                                    onsubmit="return confirm('Are you sure you want to delete this patient record?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-light btn-sm text-danger">
-                                                        <i class="mdi mdi-delete"></i>
-                                                    </button>
-                                                </form>
+                                                @can('edit', $patient)
+                                                    <a style="margin-right:8px"
+                                                        href="{{ route('patients.edit', $patient->id) }}"
+                                                        class="btn btn-light btn-sm text-primary"><i
+                                                            class="mdi mdi-pencil"></i></a>
+                                                @endcan
+                                                @can('delete', $patient)
+                                                    <form action="{{ route('patients.destroy', $patient->id) }}" method="POST"
+                                                        class="d-inline"
+                                                        onsubmit="return confirm('Are you sure you want to delete this patient record?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-light btn-sm text-danger">
+                                                            <i class="mdi mdi-delete"></i>
+                                                        </button>
+                                                    </form>
+                                                @endcan
                                             </div>
                                         </td>
                                     </tr>

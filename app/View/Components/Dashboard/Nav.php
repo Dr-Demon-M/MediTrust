@@ -4,6 +4,7 @@ namespace App\View\Components\Dashboard;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class Nav extends Component
@@ -21,9 +22,10 @@ class Nav extends Component
      */
     public function render(): View|Closure|string
     {
-        $notifications = auth()->user()->doctor->unreadNotifications()->limit(5)->get();
-        $newCount = auth()->user()->doctor->unreadNotifications()->count();
-        
-        return view('components.dashboard.nav', compact('notifications', 'newCount'));
+        $notifications = auth()->guard('web')->user()->doctor->unreadNotifications()->limit(5)->get();
+        $newCount = auth()->guard('web')->user()->doctor->unreadNotifications()->count();
+        $chats = auth()->user()->doctor->conversations()->with('patient')->get();
+
+        return view('components.dashboard.nav', compact('notifications', 'newCount', 'chats'));
     }
 }

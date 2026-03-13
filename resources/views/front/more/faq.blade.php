@@ -40,17 +40,17 @@
                                     to help you. Feel free to contact us using any of the options below.</p>
 
                                 <div class="contact-options">
-                                    <a href="#" class="contact-option">
+                                    <a href="mailto:support@meditrust.com" class="contact-option">
                                         <i class="bi bi-envelope"></i>
                                         <span>Email Support</span>
                                     </a>
 
-                                    <a href="#" class="contact-option">
+                                    <a href="https://wa.me/201093808945" class="contact-option" target="_blank">
                                         <i class="bi bi-chat-dots"></i>
                                         <span>Send a Message</span>
                                     </a>
 
-                                    <a href="#" class="contact-option">
+                                    <a href="tel:+201001234567" class="contact-option">
                                         <i class="bi bi-telephone"></i>
                                         <span>Call Us</span>
                                     </a>

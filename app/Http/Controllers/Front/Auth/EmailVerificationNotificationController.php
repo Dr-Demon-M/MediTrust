@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmailVerificationNotificationController extends Controller
 {
@@ -13,11 +14,12 @@ class EmailVerificationNotificationController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        if ($request->user()->hasVerifiedEmail()) {
+        $user = Auth::guard('patient')->user();
+        if ($user->hasVerifiedEmail()) {
             return redirect()->intended(route('front.home', absolute: false));
         }
 
-        $request->user()->sendEmailVerificationNotification();
+        $user->sendEmailVerificationNotification();
 
         return back()->with('status', 'verification-link-sent');
     }

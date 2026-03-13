@@ -1371,3 +1371,197 @@ cursor:pointer;
 background:#d9363e;
 }
 
+/* Contact Page Custom Styling */
+
+.contact-hero {
+    padding-bottom: 120px !important;
+}
+
+.mt-n5 {
+    margin-top: -80px !important;
+}
+
+.contact-info-card {
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+}
+
+.contact-info-card:hover {
+    transform: translateY(-10px);
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    background: rgba(31, 59, 179, 0.1);
+    color: #1f3bb3;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.custom-input {
+    background-color: #f8f9fa !important;
+    border: 2px solid transparent !important;
+    border-radius: 12px !important;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+
+.custom-input:focus {
+    background-color: #fff !important;
+    border-color: #1f3bb3 !important;
+    box-shadow: 0 5px 15px rgba(31, 59, 179, 0.1) !important;
+}
+
+.btn-primary {
+    background-color: #1f3bb3;
+    border-color: #1f3bb3;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background-color: #0d1b5a;
+    border-color: #0d1b5a;
+}
+
+/* إخفاء المحتوى في البداية */
+.delayed-appearance {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* الكلاس الذي سيتم إضافته بواسطة JS */
+.is-visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* تحسين سرعة الحركات الافتراضية */
+.animate__animated {
+    --animate-duration: 1s;
+}
+
+.btn-chat {
+    background-color: #0d6efd; /* لون أزرق طبي احترافي */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-chat:hover {
+    background-color: #0b5ed7;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+}
+
+.btn-chat i {
+    font-size: 1.1rem;
+}
+
+/* تحسينات عامة لصندوق الدردشة */
+.clinic-chat-box {
+    max-width: 900px; /* تحديد عرض أقصى لعدم تمدد الشات بشكل مبالغ فيه */
+    margin: 0 auto;
+    border-radius: 20px !important;
+    background: #ffffff;
+}
+
+/* منطقة الرسائل */
+.chat-body {
+    background-color: #f0f2f5 !important;
+    padding: 25px !important;
+    display: flex;
+    flex-direction: column;
+}
+
+/* تنسيق الفقاعة العام - حل مشكلة المساحات الداخلية */
+.msg-content {
+    display: inline-block;
+    padding: 12px 18px !important; /* مساحة داخلية للنص */
+    margin-bottom: 2px;
+    word-wrap: break-word; /* لضمان عدم خروج النص الطويل */
+    position: relative;
+    min-width: 80px; /* عرض أدنى لضمان ظهور الوقت بشكل جيد */
+}
+
+/* فقاعة الطبيب (يسار) */
+.doctor-msg {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+}
+
+.doctor-msg .msg-content {
+    background: #ffffff !important;
+    color: #1c1e21 !important;
+    border-radius: 18px 18px 18px 4px !important;
+    border: 1px solid #e4e6eb !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+    text-align: left;
+}
+
+/* فقاعة المريض (يمين) */
+.patient-msg {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
+.patient-msg .msg-content {
+    background: #0084ff !important; /* لون أزرق صريح ومريح */
+    color: #ffffff !important;
+    border-radius: 18px 18px 4px 18px !important;
+    text-align: right;
+    box-shadow: 0 2px 4px rgba(0,132,255,0.2) !important;
+}
+
+/* تنسيق الوقت أسفل النص */
+.msg-time {
+    display: block;
+    font-size: 0.75rem;
+    margin-top: 5px;
+    opacity: 0.8;
+}
+
+.doctor-msg .msg-time {
+    color: #65676b;
+    text-align: left;
+}
+
+.patient-msg .msg-time {
+    color: #e0e0e0;
+    text-align: right;
+}
+
+/* منطقة الإدخال (Footer) */
+.chat-footer {
+    padding: 15px 20px !important;
+    background: #fff !important;
+}
+
+#messageInput {
+    background: #f0f2f5 !important;
+    border: none !important;
+    border-radius: 25px !important;
+    padding: 12px 20px !important;
+}
+
+#messageInput:focus {
+    box-shadow: 0 0 0 2px #0084ff33 !important;
+}
+
+/* زر الإرسال */
+.chat-footer .btn-primary {
+    background: #0084ff !important;
+    border: none !important;
+}

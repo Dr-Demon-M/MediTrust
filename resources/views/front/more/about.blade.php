@@ -8,7 +8,8 @@
             <div class="breadcrumbs">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('front.home') }}"><i class="bi bi-house"></i> Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('front.home') }}"><i class="bi bi-house"></i> Home</a>
+                        </li>
                         <li class="breadcrumb-item active current">About</li>
                     </ol>
                 </nav>
@@ -62,8 +63,8 @@
                             </div>
 
                             <div class="cta-buttons" data-aos="fade-up" data-aos-delay="300">
-                                <a href="#" class="btn-primary">Meet Our Doctors</a>
-                                <a href="#" class="btn-secondary">View Our Services</a>
+                                <a href="{{route('front.doctors.index')}}" class="btn-primary">Meet Our Doctors</a>
+                                <a href="{{route('front.services.index')}}" class="btn-secondary">View Our Services</a>
                             </div>
                         </div>
                     </div>
@@ -115,7 +116,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
 
             </div>
